@@ -4,6 +4,8 @@
 */
 package quarks.samples.apps.mqtt;
 
+import static quarks.connectors.iot.IotDevice.CMD_PAYLOAD;
+
 import java.util.Arrays;
 
 import com.google.gson.JsonObject;
@@ -99,7 +101,7 @@ public abstract class AbstractMqttApplication extends AbstractApplication {
      * @return the command's argument value 
      */
     public String getCommandValueString(JsonObject jo) {
-        return jo.get("payload").getAsJsonObject().get("value").getAsString();
+        return jo.get(CMD_PAYLOAD).getAsJsonObject().get("value").getAsString();
     }
 
 }

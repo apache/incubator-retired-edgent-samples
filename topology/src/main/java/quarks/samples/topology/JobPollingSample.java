@@ -21,7 +21,6 @@ package quarks.samples.topology;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -29,7 +28,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import quarks.execution.Job;
-import quarks.execution.JobRegistryService;
+import quarks.execution.services.JobRegistryService;
 import quarks.providers.development.DevelopmentProvider;
 import quarks.runtime.etiao.JobRegistry;
 import quarks.topology.TStream;
@@ -59,8 +58,8 @@ public class JobPollingSample {
 
         // Asynchronously start two jobs
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
-        executor.schedule(app.getCallable("Monitored1"), 100, TimeUnit.MILLISECONDS);
-        executor.schedule(app.getCallable("Monitored2"), 3300, TimeUnit.MILLISECONDS);
+        executor.schedule(app.getRunnable("Monitored1"), 100, TimeUnit.MILLISECONDS);
+        executor.schedule(app.getRunnable("Monitored2"), 3300, TimeUnit.MILLISECONDS);
     }
 
     JobPollingSample() throws Exception {
@@ -70,7 +69,7 @@ public class JobPollingSample {
 
     void monitored(String name) throws InterruptedException, ExecutionException {
         Topology t = dtp.newTopology(name);
-        
+
         Random r = new Random();
         TStream<Double> d  = t.poll(() -> r.nextGaussian(), 100, TimeUnit.MILLISECONDS);
         d.sink(tuple -> System.out.print("."));
@@ -84,7 +83,7 @@ public class JobPollingSample {
 
         provider().getServices().getService(JobRegistryService.class).removeJob(job.getId());
     }
-    
+
     /**
      * Monitoring application polls the job registry every 1 sec.
      */
@@ -117,13 +116,16 @@ public class JobPollingSample {
         return dtp;
     }
     
-    private Callable<Integer> getCallable(String name) {
-        return new Callable<Integer>() {
+    private Runnable getRunnable(String name) {
+        return new Runnable() {
 
             @Override
-            public Integer call() throws Exception {
-                monitored(name);
-                return new Integer(0);
+            public void run() {
+                try {
+                    monitored(name);
+                } catch (Throwable t) {
+                    throw new RuntimeException(t);
+                }
             }
         };
     }

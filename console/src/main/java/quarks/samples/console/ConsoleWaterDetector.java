@@ -4,6 +4,7 @@
 */
 package quarks.samples.console;
 
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
@@ -146,6 +147,14 @@ public class ConsoleWaterDetector {
 		DirectProvider dp = new DevelopmentProvider();
 		
 		System.out.println(dp.getServices().getService(HttpServer.class).getConsoleUrl());
+		
+        try {
+            PrintWriter writer = new PrintWriter("consoleUrl.txt", "UTF-8");
+            writer.println(dp.getServices().getService(HttpServer.class).getConsoleUrl());
+            writer.close();
+        } catch ( Exception e) {
+            e.printStackTrace();
+        }
 		
 		Topology wellTopology = dp.newTopology("ConsoleWaterDetector");
 		

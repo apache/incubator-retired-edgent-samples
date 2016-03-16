@@ -52,9 +52,9 @@ public class SplitWithEnumSample {
         EnumMap<LogSeverityEnum, TStream<String>> categories = d
             .split(LogSeverityEnum.class, e -> LogSeverityEnum.valueOf(e.split("_")[0]));
 
-        TStream<String> warnStream = categories.get(LogSeverityEnum.WARNING);
-        TStream<String> errorStream = categories.get(LogSeverityEnum.ERROR);
-        TStream<String> infoStream = categories.get(LogSeverityEnum.INFO);
+        TStream<String> warnStream = categories.get(LogSeverityEnum.WARNING).tag("WARN");
+        TStream<String> errorStream = categories.get(LogSeverityEnum.ERROR).tag("ERROR");
+        TStream<String> infoStream = categories.get(LogSeverityEnum.INFO).tag("INFO");
 
         warnStream.sink(data -> System.out.println("warnStream = " + data));
         errorStream.sink(data -> System.out.println("errorStream = " + data));

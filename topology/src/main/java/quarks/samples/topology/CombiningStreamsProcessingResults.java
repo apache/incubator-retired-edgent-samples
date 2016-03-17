@@ -62,22 +62,21 @@ public class CombiningStreamsProcessingResults {
 
         // Split the stream by blood pressure category
         List<TStream<Map<String, Integer>>> categories = readings.split(6, tuple -> {
-            if (tuple.get("Systolic") < 120 && tuple.get("Diastolic") < 80) {
+            int s = tuple.get("Systolic");
+            int d = tuple.get("Diastolic");
+            if (s < 120 && d < 80) {
                 // Normal
                 return 0;
-            } else if ((tuple.get("Systolic") >= 120 && tuple.get("Systolic") <= 139) ||
-                       (tuple.get("Diastolic") >= 80 && tuple.get("Diastolic") <= 89)) {
+            } else if ((s >= 120 && s <= 139) || (d >= 80 && d <= 89)) {
                 // Prehypertension
                 return 1;
-            } else if ((tuple.get("Systolic") >= 140 && tuple.get("Systolic") <= 159) ||
-                       (tuple.get("Diastolic") >= 90 && tuple.get("Diastolic") <= 99)) {
+            } else if ((s >= 140 && s <= 159) || (d >= 90 && d <= 99)) {
                 // High Blood Pressure (Hypertension) Stage 1
                 return 2;
-            } else if ((tuple.get("Systolic") >= 160 && tuple.get("Systolic") <= 179) ||
-                       (tuple.get("Diastolic") >= 100 && tuple.get("Diastolic") <= 109)) {
+            } else if ((s >= 160 && s <= 179) || (d >= 100 && d <= 109)) {
                 // High Blood Pressure (Hypertension) Stage 2
                 return 3;
-            } else if (tuple.get("Systolic") >= 180 && tuple.get("Diastolic") >= 110)  {
+            } else if (s >= 180 && d >= 110)  {
                 // Hypertensive Crisis
                 return 4;
             } else {

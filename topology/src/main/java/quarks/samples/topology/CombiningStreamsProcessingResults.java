@@ -63,6 +63,7 @@ public class CombiningStreamsProcessingResults {
 
         // Split the stream by blood pressure category
         List<TStream<Map<String, Integer>>> categories = readings.split(6, new ToIntFunction<Map<String, Integer>>() {
+            private static final long serialVersionUID = 1L;
             @Override
             public int applyAsInt(Map<String, Integer> tuple) {
                 if (tuple.get("Systolic") < 120 && tuple.get("Diastolic") < 80) {

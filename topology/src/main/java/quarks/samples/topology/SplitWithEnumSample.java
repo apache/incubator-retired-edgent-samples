@@ -17,14 +17,14 @@
  */
 package quarks.samples.topology;
 
+import java.util.EnumMap;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 import quarks.console.server.HttpServer;
 import quarks.providers.development.DevelopmentProvider;
 import quarks.topology.TStream;
 import quarks.topology.Topology;
-
-import java.util.EnumMap;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class SplitWithEnumSample {
 
@@ -32,6 +32,7 @@ public class SplitWithEnumSample {
 
         ALERT(1), CRITICAL(2), ERROR(3), WARNING(4), NOTICE(5), INFO(6), DEBUG(7);
 
+        @SuppressWarnings("unused")
         private final int code;
 
         LogSeverityEnum(final int code) {

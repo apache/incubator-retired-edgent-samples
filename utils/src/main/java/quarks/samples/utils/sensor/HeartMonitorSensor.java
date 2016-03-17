@@ -29,6 +29,7 @@ import quarks.function.Supplier;
  *
  */
 public class HeartMonitorSensor implements Supplier<Map<String,Integer>> {
+    private static final long serialVersionUID = 1L;
     // Initial blood pressure
     public Integer currentSystolic = 115;
     public Integer currentDiastolic = 75;

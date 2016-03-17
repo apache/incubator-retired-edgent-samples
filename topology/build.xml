@@ -10,6 +10,7 @@
   <path id="compile.classpath">
     <path refid="quarks.samples.classpath"/>
     <pathelement location="${quarks.analytics}/math3/lib/quarks.analytics.math3.jar"/>
+    <pathelement location="${quarks.lib}/quarks.runtime.jobregistry.jar"/>
     <pathelement location="${lib}/quarks.samples.utils.jar"/>
     <path refid="quarks.ext.classpath" />
   </path>

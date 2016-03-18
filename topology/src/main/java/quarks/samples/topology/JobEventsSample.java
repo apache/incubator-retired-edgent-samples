@@ -133,14 +133,18 @@ public class JobEventsSample {
      * @return the wrapped data
      */
     static JsonObject wrap(JobRegistryService.EventType evType, Job job) {
-        JsonObject jo = new JsonObject();
-        jo.addProperty("time", (Number)System.currentTimeMillis());
-        jo.addProperty("event", evType.toString());
-        jo.addProperty("jobId", job.getId());
-        jo.addProperty("jobName", job.getName());
-        jo.addProperty("jobState", job.getCurrentState().toString());
-        jo.addProperty("jobNextState", job.getNextState().toString());
-        return jo;
+        JsonObject value = new JsonObject();
+        value.addProperty("time", (Number)System.currentTimeMillis());
+        value.addProperty("event", evType.toString());
+        JsonObject obj = new JsonObject();
+        obj.addProperty("id", job.getId());
+        obj.addProperty("name", job.getName());
+        obj.addProperty("state", job.getCurrentState().toString());
+        obj.addProperty("nextState", job.getNextState().toString());
+        obj.addProperty("health", job.getHealth().toString());
+        obj.addProperty("lastError", job.getLastError());
+        value.add("job", obj);
+        return value;
     }
 
     private DirectProvider provider() {

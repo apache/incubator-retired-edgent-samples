@@ -41,7 +41,7 @@ public class DevelopmentSampleJobMXBean {
         StringBuffer sbuf = new StringBuffer();
         sbuf.append(DevelopmentProvider.JMX_DOMAIN);
         sbuf.append(":interface=");
-        sbuf.append(ObjectName.quote("quarks.graph.execution.mbeans.JobMXBean"));
+        sbuf.append(ObjectName.quote("quarks.execution.mbeans.JobMXBean"));
         sbuf.append(",type=");
         sbuf.append(ObjectName.quote("job"));
         sbuf.append(",*");
@@ -60,8 +60,12 @@ public class DevelopmentSampleJobMXBean {
         	String jobName = (String) mBeanServer.getAttribute(objectName, "Name");
         	String jobCurState = (String) mBeanServer.getAttribute(objectName, "CurrentState");
         	String jobNextState = (String) mBeanServer.getAttribute(objectName, "NextState");
+            String jobHealth = (String) mBeanServer.getAttribute(objectName, "Health");
+            String jobLastError = (String) mBeanServer.getAttribute(objectName, "LastError");
         	
-        	System.out.println("Found a job with JobId: " + jobId + " Name: " + jobName + " CurrentState: " + jobCurState + " NextState: " + jobNextState);
+        	System.out.println("Found a job with JobId: " + jobId + " Name: " + jobName + 
+                    " CurrentState: " + jobCurState + " NextState: " + jobNextState + 
+                    " Health: " + jobHealth + " LastError: \"" + jobLastError + "\"");
         }
     }
 }

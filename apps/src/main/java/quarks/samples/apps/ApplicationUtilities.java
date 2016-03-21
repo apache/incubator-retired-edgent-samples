@@ -70,7 +70,7 @@ public class ApplicationUtilities {
      */
     public <T> TStream<T> traceStream(TStream<T> stream, Supplier<String> label) {
         if (includeTraceStreamOps(label.get())) {
-            TStream<?> s = stream.filter(traceTuplesFn(label.get()));
+            TStream<?> s = stream.filter(traceTuplesFn(label.get())).tag(label.get()+".trace");
             s.peek(sample -> System.out.println(String.format("%s: %s", label.get(), sample.toString())));
         }
         return stream;
@@ -168,7 +168,7 @@ public class ApplicationUtilities {
          
         // Transform the stream to a TStream<String> of string log entry values
         TStream<String> stringEntries = stream.map(sample -> String.format("[%s] [%s] %s", new Date().toString(), eventTag, sample.toString()))
-                .tag("log."+baseName);
+                .tag(baseName+".log");
 
         // Use the FileStreams connector to write the logs.
         //

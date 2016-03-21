@@ -13,7 +13,6 @@ import java.util.List;
 
 import org.apache.commons.math3.util.Pair;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -168,44 +167,6 @@ public class JsonTuples {
                 };
     }
 
-    /**
-     * Create a function that creates a new sample containing the collection
-     * of input sample readings.
-     * <p>
-     * The single sample collects the all of the {@code JsonTuple.KEY_READING} 
-     * values from {@code List<JsonObject>} into a single {@code JsonArray}.
-     * <p> 
-     * The resulting sample contains the properties:
-     * <ul>
-     * <li>JsonTuple.KEY_ID</li>
-     * <li>JsonTuple.KEY_MSEC - msecTimestamp of the last sample in the window</li>
-     * <li>JsonTuple.KEY_AGG_BEGIN_MSEC - msecTimestamp of the first sample in the window</li>
-     * <li>JsonTuple.KEY_AGG_COUNT - number of samples in the window ({@code value=factor})</li>
-     * <li>JsonTuple.KEY_READING - a JsonArray of each JsonObject's KEY_READING reading</li>
-     * </ul>
-     * <p>
-     * Sample use:
-     * <pre>{@code
-     * TStream<JsonObject> s = ...
-     * // reduce s by a factor of 100 
-     * TStream<JsonObject> reduced = batch(s, 100, collect());
-     * }</pre>
-     * @return the accumulate function
-     * @see #batch(TStream, int, BiFunction)
-     */
-    public static BiFunction<List<JsonObject>,String,JsonObject> collect() {
-        return (samples, key) -> {
-            JsonObject jo = new JsonObject();
-            JsonTuples.addAggStdInfo(jo, samples);
-            JsonArray ja = new JsonArray();
-            for (JsonObject j : samples) {
-                ja.add(j.get(KEY_READING));
-            }
-            jo.add(KEY_READING, ja);
-            return jo;
-        };
-    }
-
     private static void addAggStdInfo(JsonObject jo, List<JsonObject> samples) {
         // beginMsec, endMsec, nSamples
         long msec = samples.get(0).get(KEY_TS).getAsLong();
@@ -215,50 +176,6 @@ public class JsonTuples {
         jo.addProperty(KEY_TS, msec2);
         jo.addProperty(KEY_AGG_BEGIN_TS, msec);
         jo.addProperty(KEY_AGG_COUNT, nSamples);
-    }
-
-    /**
-     * Process a window of tuples in batches.  
-     * TODO REMOVE ONCE TStream.batch(int) or such exists.
-     * <p>
-     * Accumulate a window of {@code size} tuples, 
-     * invoke {@code batcher.apply()} on the batch, clear the window,
-     * and repeat for the next batch.
-     * <p>
-     * Useful for applying analytics to reduce the number of samples
-     * by a factor of {@code size} - e.g., 100:1.  Typical reductions
-     * compute some characteristic statistic for the batch, e.g., a mean,
-     * or simply collect the samples into a single sample to then
-     * process by some other complex analytic such as an FFT.
-     * <p>
-     * Sample use:
-     * <pre>{@code
-     * TStream<JsonObject> s = ...
-     * // reduce s by a factor of 100 
-     * TStream<JsonObject> reduced = Reducers.batch(s, 100, 
-     *          JsonTuples.statistics(Statistic.MEAN, Statistic.STDDEV));
-     * }</pre>
-     * 
-     * @param stream the stream to reduce
-     * @param size the batch size
-     * @param batcher function to perform the aggregation
-     * @return {@code TStream<JsonObject>} for the reduced {@code stream}
-     */
-    public static TStream<JsonObject> batch(TStream<JsonObject> stream, int size, BiFunction<List<JsonObject>,String,JsonObject> batcher) {
-        // workaround for omission of batched windows
-        int[] cnt = new int[] {0};
-        return stream.last(size, keyFn())
-                .aggregate(
-                        (samples, key) -> {
-                            if (++cnt[0] >= size) {
-                                cnt[0] = 0;
-                                return batcher.apply(samples, key);
-                            }
-                            else
-                                return null;
-                        })
-                // workaround issue#133 where aggregate doesn't ignore null fn results
-                .filter(sample -> sample != null);
     }
 
 }

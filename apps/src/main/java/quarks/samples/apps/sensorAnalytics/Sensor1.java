@@ -100,14 +100,14 @@ public class Sensor1 {
         
         // Handle the sensor's device commands
         app.mqttDevice().commands(commandId("set1hzMeanRangeThreshold"))
-            .tag(commandId("set1hzMeanRangeThreshold"))
+            .tag(commandId("set1hzMeanRangeThresholdCmd"))
             .sink(jo -> {
                     Range<Integer> newRange = Range.valueOf(getCommandValue(jo), Integer.class);
                     System.out.println("===== Changing range to "+newRange+" ======");
                     range.set(newRange);
                 });
         app.mqttDevice().commands(commandId("setPublish1hzOutsideRange"))
-            .tag(commandId("setPublish1hzOutsideRange"))
+            .tag(commandId("setPublish1hzOutsideRangeCmd"))
             .sink(jo -> {
                     Boolean b = new Boolean(getCommandValue(jo));
                     System.out.println("===== Changing isPublish1hzOutsideRange to "+b+" ======");
@@ -123,14 +123,15 @@ public class Sensor1 {
         traceStream(raw1khz, "raw1khz");
         
         // Wrap the raw sensor reading in a JsonObject for convenience.
-        TStream<JsonObject> j1khz = JsonTuples.wrap(raw1khz, sensorId);
+        TStream<JsonObject> j1khz = JsonTuples.wrap(raw1khz, sensorId)
+                .tag("j1khz");
         traceStream(j1khz, "j1khz");
         
         // Data-reduction: reduce 1khz samples down to
         // 1hz aggregate statistics samples.
-        TStream<JsonObject> j1hzStats = JsonTuples.batch(j1khz, 1000,
-                                JsonTuples.statistics(MIN, MAX, MEAN, STDDEV))
-                 .tag("1hzStats");
+        TStream<JsonObject> j1hzStats = j1khz.last(1000, JsonTuples.keyFn())
+                .batch(JsonTuples.statistics(MIN, MAX, MEAN, STDDEV))
+                .tag("1hzStats");
         
         // Create a 30 second sliding window of average trailing Mean values
         // and enrich samples with that information.
@@ -145,7 +146,8 @@ public class Sensor1 {
                 jo.addProperty("AvgTrailingMean", Math.round(meanSum / samples.size()));
                 jo.addProperty("AvgTrailingMeanCnt", samples.size());
                 return jo;
-            });
+            })
+            .tag("1hzStats.enriched");
         traceStream(j1hzStats, "j1hzStats");
 
         // Detect 1hz samples whose MEAN value are
@@ -154,7 +156,8 @@ public class Sensor1 {
                 sample -> {
                     int value = JsonTuples.getStatistic(sample, MEAN).getAsInt();
                     return !range.get().contains(value);
-                }).tag("outside1hzMeanRange");
+                })
+                .tag("outside1hzMeanRange");
         traceStream(outside1hzMeanRange, () -> "outside1hzMeanRange"+range.get()); 
         
         // Log every outside1hzMeanRange event
@@ -166,8 +169,9 @@ public class Sensor1 {
         // TODO enhance MqttDevice with configurable reliever. 
         app.mqttDevice().events(
                 PlumbingStreams.pressureReliever(
-                    outside1hzMeanRange.filter(tuple -> isPublish1hzOutsideRange.get()),
-                    tuple -> 0, 30),
+                    outside1hzMeanRange.filter(tuple -> isPublish1hzOutsideRange.get())
+                                       .tag("outside1hzMeanRangeEvent.conditional"),
+                    tuple -> 0, 30).tag("outside1hzMeanRangeEvent.pressureRelieved"),
                 app.sensorEventId(sensorId, "outside1hzMeanRangeEvent"), QoS.FIRE_AND_FORGET);
         
         // Demonstrate periodic publishing of a sliding window if
@@ -200,7 +204,7 @@ public class Sensor1 {
         List<JsonObject> lastN = Collections.synchronizedList(new ArrayList<>());
         stream.last(count, JsonTuples.keyFn())
             .aggregate((samples, key) -> samples)
-            .tag("lastN")
+            .tag(event+".lastN")
             .sink(samples -> {
                     // Capture the new list/window.  
                     synchronized(lastN) {
@@ -212,8 +216,8 @@ public class Sensor1 {
         // Publish the lastN (with trimmed down info) every nSec seconds
         // if anything changed since the last publish.
         TStream<JsonObject> periodicLastN = 
-                t.poll(() -> 1, nSec, TimeUnit.SECONDS)
-                .filter(trigger -> !lastN.isEmpty())
+                t.poll(() -> 1, nSec, TimeUnit.SECONDS).tag(event+".trigger")
+                .filter(trigger -> !lastN.isEmpty()).tag(event+".changed")
                 .map(trigger -> {
                     synchronized(lastN) {
                         // create a single JsonObject with the list
@@ -237,15 +241,16 @@ public class Sensor1 {
                         return jo;
                     }
                 })
-                .tag("periodicLastN");
+                .tag(event);
 
-        traceStream(periodicLastN, "periodicLastN-"+event);
+        traceStream(periodicLastN, event);
 
         // Use a pressureReliever to prevent backpressure if the broker
         // can't be contacted.
         // TODO enhance MqttDevice with configurable reliever. 
         app.mqttDevice().events(
-                PlumbingStreams.pressureReliever(periodicLastN, tuple -> 0, 30),
+                PlumbingStreams.pressureReliever(periodicLastN, tuple -> 0, 30)
+                    .tag(event+".pressureRelieved"),
                 app.sensorEventId(sensorId, event), QoS.FIRE_AND_FORGET);
     }
     

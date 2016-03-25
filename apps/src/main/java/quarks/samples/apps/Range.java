@@ -277,7 +277,7 @@ public class Range<T extends Comparable<?>> implements Serializable {
      * <p>
      * @param v the value to check for containment
      * @return true if the Region contains the value
-     * @see #contains(T, Comparator)
+     * @see #contains(Comparable, Comparator)
      */
     public boolean contains(T v) {
         Comparator<T> cmp = getComparator(v);

@@ -16,10 +16,10 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 */
-package quarks.samples.apps;
+package quarks.test.samples.apps;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
@@ -31,6 +31,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import quarks.function.Supplier;
+import quarks.samples.apps.Range;
 
 /**
  * Test Range.
@@ -58,7 +59,7 @@ public class RangeTest {
         if (expected)
             assertEquals("range"+range+".hashCode()", hashCode, range.hashCode());
         else
-            assertNotEquals("range"+range+".hashCode()", hashCode, range.hashCode());
+            assertFalse("range"+range+".hashCode()", hashCode == range.hashCode());
     }
 
     private <T extends Comparable<?>> void testSupportedType(Supplier<Range<T>> range, Class<T> clazz, Boolean expected) {

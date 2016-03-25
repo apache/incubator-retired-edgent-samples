@@ -37,10 +37,10 @@ import org.apache.commons.math3.util.Pair;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import quarks.analytics.sensors.Range;
 import quarks.connectors.iot.QoS;
 import quarks.function.Supplier;
 import quarks.samples.apps.JsonTuples;
-import quarks.samples.apps.Range;
 import quarks.samples.utils.sensor.PeriodicRandomSensor;
 import quarks.topology.TStream;
 import quarks.topology.Topology;

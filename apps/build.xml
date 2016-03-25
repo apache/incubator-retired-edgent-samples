@@ -28,6 +28,7 @@
     <pathelement location="${quarks.connectors}/file/lib/quarks.connectors.file.jar"/>
     <pathelement location="${quarks.connectors}/serial/lib/quarks.connectors.serial.jar"/>
     <pathelement location="${quarks.analytics}/math3/lib/quarks.analytics.math3.jar"/>
+    <pathelement location="${quarks.analytics}/sensors/lib/quarks.analytics.sensors.jar"/>
     <pathelement location="${quarks.samples}/quarks.samples.topology.jar"/>
     <pathelement location="${quarks.samples}/lib/quarks.samples.utils.jar"/>
     <pathelement location="${quarks.samples}/quarks.samples.connectors.jar"/>

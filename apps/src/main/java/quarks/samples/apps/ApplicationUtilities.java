@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
+import quarks.analytics.sensors.Range;
 import quarks.connectors.file.FileStreams;
 import quarks.connectors.file.FileWriterCycleConfig;
 import quarks.connectors.file.FileWriterFlushConfig;

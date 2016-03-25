@@ -34,9 +34,6 @@ under the License.
  * <li>{@link quarks.samples.apps.ApplicationUtilities} - some
  *     general configuration driven utilities. 
  *     </li>
- * <li>{@link quarks.samples.apps.Range} - a flexible range of values useful
- *     in filter predicates.
- *     </li>
  * <li>{@link quarks.samples.apps.JsonTuples} - utilities for wrapping
  *     sensor samples in a JsonObject and operating on it.
  *     </li>

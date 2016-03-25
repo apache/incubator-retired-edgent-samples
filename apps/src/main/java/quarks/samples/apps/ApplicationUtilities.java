@@ -138,7 +138,7 @@ public class ApplicationUtilities {
      * @param clazz the Range's type (e.g., Integer.class)
      * @return the Range<T>
      */
-    public <T> Range<T> getRange(String sensorId, String label, Class<T> clazz) {
+    public <T extends Comparable<?>> Range<T> getRange(String sensorId, String label, Class<T> clazz) {
         String name = getSensorPropertyName(sensorId, label, "range");
         String val = config().getProperty(name);
         if (val==null)

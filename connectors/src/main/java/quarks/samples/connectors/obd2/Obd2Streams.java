@@ -16,7 +16,7 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 */
-package quarks.samples.apps.obd2;
+package quarks.samples.connectors.obd2;
 
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -37,7 +37,7 @@ import com.google.gson.JsonObject;
 
 import quarks.analytics.math3.json.JsonAnalytics;
 import quarks.connectors.serial.SerialDevice;
-import quarks.samples.connectors.elm327.ELM327Streams;
+import quarks.samples.connectors.elm327.Elm327Streams;
 import quarks.topology.TStream;
 import quarks.topology.TWindow;
 
@@ -54,19 +54,20 @@ public class Obd2Streams {
      * Poll temperatures every five seconds and
      * calculate the maximum reading and rate of change
      * (slope) over the last minute, partitioned by parameter
-     * {@link Cmd#PID pid}. Filter so that only
+     * {@link quarks.samples.connectors.elm327.Cmd#PID pid}. Filter so that only
      * those with a rate of increase greater than
      * or equal to 1°C/minute is present on the returned stream.
      * 
-     * Temperatures included are {@link AIR_INTAKE_TEMP} and
-     * {@link ENGINE_COOLANT_TEMP}.
+     * Temperatures included are
+     * {@link quarks.samples.connectors.elm327.Pids01#AIR_INTAKE_TEMP AIR_INTAKE_TEMP} and
+     * {@link quarks.samples.connectors.elm327.Pids01#ENGINE_COOLANT_TEMP ENGINE_COOLANT_TEMP}.
      * 
      * @param device Serial device the ELM327 is connected to.
      * @return Stream that will contain parameters with increasing temperatures.
      */
     public static TStream<JsonObject> increasingTemps(SerialDevice device) {
 
-        TStream<JsonArray> tempsA = ELM327Streams.poll(device, 5, SECONDS,
+        TStream<JsonArray> tempsA = Elm327Streams.poll(device, 5, SECONDS,
                 AIR_INTAKE_TEMP,
                 ENGINE_COOLANT_TEMP);
 
@@ -90,7 +91,8 @@ public class Obd2Streams {
      * Get a stream containing vehicle speed (km/h)
      * and engine revs (rpm).
      * 
-     * {@link SPEED Speed} and {@link RPM engine revs}
+     * {@link quarks.samples.connectors.elm327.Pids01#SPEED Speed}
+     * and {@link quarks.samples.connectors.elm327.Pids01#RPM engine revs}
      * are polled every 200ms and returned as a stream
      * containing JSON objects with keys {@code speed}
      * and {@code rpm}.
@@ -102,9 +104,9 @@ public class Obd2Streams {
      * @param device Serial device the ELM327 is connected to.
      * @return Stream that will contain speed and engine revolutions.
      */
-    public static TStream<JsonObject> tach(SerialDevice serial) {
+    public static TStream<JsonObject> tach(SerialDevice device) {
 
-        TStream<JsonArray> rpmSpeed = ELM327Streams.poll(serial, 200, TimeUnit.MILLISECONDS,
+        TStream<JsonArray> rpmSpeed = Elm327Streams.poll(device, 200, TimeUnit.MILLISECONDS,
                 SPEED, RPM);
 
         TStream<JsonObject> tach = rpmSpeed.map(ja -> {

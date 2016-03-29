@@ -33,7 +33,7 @@ import quarks.topology.TStream;
  *
  * @see <a href="https://en.wikipedia.org/wiki/ELM327">ELM327</a>
  */
-public class ELM327Streams {
+public class Elm327Streams {
 	
     /**
      * Periodically execute a number of ELM327 commands.

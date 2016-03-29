@@ -24,6 +24,9 @@ import java.nio.charset.StandardCharsets;
 
 import com.google.gson.JsonObject;
 
+import quarks.connectors.serial.SerialDevice;
+import quarks.samples.connectors.elm327.runtime.CommandExecutor;
+
 /**
  * ELM327 commands.
  * 
@@ -58,6 +61,15 @@ public enum Elm327Cmds implements Cmd {
     @Override
     public String id() {
         return name();
+    }
+    
+    /**
+     * Initialize the ELM327 to a specific protocol.
+     * @param device Serial device the ELM327 is connected to.
+     * @param protocol OBD-II protocol to initialize to.
+     */
+    public static void initializeProtocol(SerialDevice device, Elm327Cmds protocol) {
+        device.setInitializer(port -> CommandExecutor.initialize(protocol, port.getOutput(), port.getInput()));
     }
 
 }

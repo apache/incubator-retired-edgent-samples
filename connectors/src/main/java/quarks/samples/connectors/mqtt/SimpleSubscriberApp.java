@@ -50,17 +50,11 @@ public class SimpleSubscriberApp {
     SimpleSubscriberApp(String mqttPropsPath) throws Exception {
         props = new Properties();
         props.load(Files.newBufferedReader(new File(mqttPropsPath).toPath()));
-        topic = props.getProperty("topic");
+        topic = props.getProperty("mqtt.topic");
     }
     
     private MqttConfig createMqttConfig() {
-        MqttConfig mqttConfig = new MqttConfig(props.getProperty("serverURI"),
-                                                null);
-        // used if broker requires username/pw authentication
-        mqttConfig.setUserName(props.getProperty("userID",
-                                System.getProperty("user.name")));
-        mqttConfig.setPassword(props.getProperty("password",
-                                "myMosquittoPw").toCharArray());
+        MqttConfig mqttConfig = MqttConfig.fromProperties(props);
         return mqttConfig;
     }
     
@@ -74,6 +68,8 @@ public class SimpleSubscriberApp {
         
         Topology t = tp.newTopology("mqttSampleSubscriber");
         
+        // System.setProperty("javax.net.debug", "ssl"); // or "all"; "help" for full list
+
         // Create the MQTT broker connector
         MqttConfig mqttConfig = createMqttConfig();
         MqttStreams mqtt = new MqttStreams(t, () -> mqttConfig);

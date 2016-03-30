@@ -24,10 +24,14 @@ import static quarks.samples.connectors.mqtt.MqttClient.OPT_CLIENT_ID;
 import static quarks.samples.connectors.mqtt.MqttClient.OPT_CN_TIMEOUT_SEC;
 import static quarks.samples.connectors.mqtt.MqttClient.OPT_IDLE_RECONNECT_INTERVAL_SEC;
 import static quarks.samples.connectors.mqtt.MqttClient.OPT_IDLE_TIMEOUT_SEC;
+import static quarks.samples.connectors.mqtt.MqttClient.OPT_KEY_STORE;
+import static quarks.samples.connectors.mqtt.MqttClient.OPT_KEY_STORE_PASSWORD;
 import static quarks.samples.connectors.mqtt.MqttClient.OPT_PASSWORD;
 import static quarks.samples.connectors.mqtt.MqttClient.OPT_PUB;
 import static quarks.samples.connectors.mqtt.MqttClient.OPT_SERVER_URI;
 import static quarks.samples.connectors.mqtt.MqttClient.OPT_TOPIC;
+import static quarks.samples.connectors.mqtt.MqttClient.OPT_TRUST_STORE;
+import static quarks.samples.connectors.mqtt.MqttClient.OPT_TRUST_STORE_PASSWORD;
 import static quarks.samples.connectors.mqtt.MqttClient.OPT_USER_ID;
 
 import quarks.connectors.mqtt.MqttConfig;
@@ -61,6 +65,8 @@ public class Runner {
             SubscriberApp subscriber = new SubscriberApp(tp, options);
             top = subscriber.buildAppTopology();
         }
+
+        // System.setProperty("javax.net.debug", "ssl"); // or "all"; "help" for full list
         
         // Submit the app/topology; send or receive the messages.
         System.out.println(
@@ -96,15 +102,14 @@ public class Runner {
             config.setUserName(options.get(OPT_USER_ID));
         if (options.get(OPT_PASSWORD) != null)
             config.setPassword(((String)options.get(OPT_PASSWORD)).toCharArray());
-        // TODO
-//        if (options.get(OPT_TRUST_STORE) != null)
-//            config.setTrustStore(options.get(OPT_TRUST_STORE));
-//        if (options.get(OPT_TRUST_STORE_PASSWORD) != null)
-//            config.setTrustStore(options.get(OPT_TRUST_STORE_PASSWORD));
-//        if (options.get(OPT_KEY_STORE) != null)
-//            config.setKeyStore(options.get(OPT_KEY_STORE));
-//        if (options.get(OPT_KEY_STORE_PASSWORD) != null)
-//            config.setTrustStore(options.get(OPT_KEY_STORE_PASSWORD));
+        if (options.get(OPT_TRUST_STORE) != null)
+            config.setTrustStore(options.get(OPT_TRUST_STORE));
+        if (options.get(OPT_TRUST_STORE_PASSWORD) != null)
+            config.setTrustStore(options.get(OPT_TRUST_STORE_PASSWORD));
+        if (options.get(OPT_KEY_STORE) != null)
+            config.setKeyStore(options.get(OPT_KEY_STORE));
+        if (options.get(OPT_KEY_STORE_PASSWORD) != null)
+            config.setTrustStore(options.get(OPT_KEY_STORE_PASSWORD));
         return config;
     }
 

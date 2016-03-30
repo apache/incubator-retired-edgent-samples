@@ -19,25 +19,28 @@ under the License.
 package quarks.samples.topology;
 
 import quarks.providers.direct.DirectProvider;
+import quarks.topology.TStream;
 import quarks.topology.Topology;
 
 /**
- * Hello World Topology sample.
+ * Hello Quarks Topology sample.
  *
  */
-public class HelloWorld {
-	
+public class HelloQuarks {
+
 	/**
-	 * Print Hello World as two tuples.
+	 * Print "Hello Quarks!" as two tuples.
 	 */
     public static void main(String[] args) throws Exception {
 
-        DirectProvider tp = new DirectProvider();
+        DirectProvider dp = new DirectProvider();
 
-        Topology t = tp.newTopology("HelloWorld");
+        Topology top = dp.newTopology();
 
-        t.strings("Hello", "World!").print();
+        TStream<String> helloStream = top.strings("Hello", "Quarks!");
 
-        tp.submit(t);
+        helloStream.print();
+
+        dp.submit(top);
     }
 }

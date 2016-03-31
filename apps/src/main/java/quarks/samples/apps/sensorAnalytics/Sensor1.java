@@ -38,6 +38,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import quarks.analytics.sensors.Range;
+import quarks.analytics.sensors.Ranges;
 import quarks.connectors.iot.QoS;
 import quarks.function.Supplier;
 import quarks.samples.apps.JsonTuples;
@@ -109,14 +110,14 @@ public class Sensor1 {
         AtomicReference<Boolean> isPublish1hzOutsideRange = new AtomicReference<>();
         
         // Initialize the controls
-        range.set(app.utils().getRange(sensorId, "outside1hzMeanRange", Integer.class));
+        range.set(app.utils().getRangeInteger(sensorId, "outside1hzMeanRange"));
         isPublish1hzOutsideRange.set(false);
         
         // Handle the sensor's device commands
         app.mqttDevice().commands(commandId("set1hzMeanRangeThreshold"))
             .tag(commandId("set1hzMeanRangeThresholdCmd"))
             .sink(jo -> {
-                    Range<Integer> newRange = Range.valueOf(getCommandValue(jo), Integer.class);
+                    Range<Integer> newRange = Ranges.valueOfInteger(getCommandValue(jo));
                     System.out.println("===== Changing range to "+newRange+" ======");
                     range.set(newRange);
                 });

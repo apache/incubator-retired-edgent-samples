@@ -25,6 +25,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import quarks.analytics.sensors.Range;
+import quarks.analytics.sensors.Ranges;
 import quarks.connectors.file.FileStreams;
 import quarks.connectors.file.FileWriterCycleConfig;
 import quarks.connectors.file.FileWriterFlushConfig;
@@ -131,20 +132,68 @@ public class ApplicationUtilities {
             name = sensorId + "." + name;  // sensorId.kind.label
         return name;
     }
+
+    private String getSensorConfigValue(String sensorId, String label, String kind) {
+        String name = getSensorPropertyName(sensorId, label, kind);
+        String val = config().getProperty(name);
+        if (val==null)
+            throw new IllegalArgumentException("Missing configuration property "+name);
+        return val;
+    }
     
     /**
      * Get the Range for a sensor range configuration item.
      * @param sensorId the sensor's id
      * @param label the range's label
-     * @param clazz the Range's type (e.g., Integer.class)
-     * @return the Range<T>
+     * @return the Range
      */
-    public <T extends Comparable<?>> Range<T> getRange(String sensorId, String label, Class<T> clazz) {
-        String name = getSensorPropertyName(sensorId, label, "range");
-        String val = config().getProperty(name);
-        if (val==null)
-            throw new IllegalArgumentException("Missing configuration property "+name);
-        return Range.valueOf(val, clazz);
+    public Range<Integer> getRangeInteger(String sensorId, String label) {
+        String val = getSensorConfigValue(sensorId, label, "range");
+        return Ranges.valueOfInteger(val);
+    }
+    
+    /**
+     * Get the Range for a sensor range configuration item.
+     * @param sensorId the sensor's id
+     * @param label the range's label
+     * @return the Range
+     */
+    public Range<Byte> getRangeByte(String sensorId, String label) {
+        String val = getSensorConfigValue(sensorId, label, "range");
+        return Ranges.valueOfByte(val);
+    }
+    
+    /**
+     * Get the Range for a sensor range configuration item.
+     * @param sensorId the sensor's id
+     * @param label the range's label
+     * @return the Range
+     */
+    public Range<Short> getRangeShort(String sensorId, String label) {
+        String val = getSensorConfigValue(sensorId, label, "range");
+        return Ranges.valueOfShort(val);
+    }
+    
+    /**
+     * Get the Range for a sensor range configuration item.
+     * @param sensorId the sensor's id
+     * @param label the range's label
+     * @return the Range
+     */
+    public Range<Float> getRangeFloat(String sensorId, String label) {
+        String val = getSensorConfigValue(sensorId, label, "range");
+        return Ranges.valueOfFloat(val);
+    }
+    
+    /**
+     * Get the Range for a sensor range configuration item.
+     * @param sensorId the sensor's id
+     * @param label the range's label
+     * @return the Range
+     */
+    public Range<Double> getRangeDouble(String sensorId, String label) {
+        String val = getSensorConfigValue(sensorId, label, "range");
+        return Ranges.valueOfDouble(val);
     }
 
     /**

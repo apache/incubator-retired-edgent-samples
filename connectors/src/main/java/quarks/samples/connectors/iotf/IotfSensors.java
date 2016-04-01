@@ -67,19 +67,8 @@ public class IotfSensors {
         // Simulated sensors for this device.
         simulatedSensors(device, true);
         
-        // In addition create a heart beat event to
-        // ensure there is some immediate output and
-        // the connection to IoTF happens as soon as possible.
-        TStream<Date> hb = topology.poll(() -> new Date(), 1, TimeUnit.MINUTES);
-        // Convert to JSON
-        TStream<JsonObject> hbj = hb.map(d -> {
-            JsonObject j = new  JsonObject();
-            j.addProperty("when", d.toString());
-            j.addProperty("hearbeat", d.getTime());
-            return j;
-        });
-        hbj.print();
-        device.events(hbj, "heartbeat", QoS.FIRE_AND_FORGET);
+        // Heartbeat
+        heartBeat(device, true);
 
         // Subscribe to commands of id "display" for this
         // device and print them to standard out
@@ -89,12 +78,13 @@ public class IotfSensors {
         tp.submit(topology);
     }
 
+
     /**
      * Simulate two bursty sensors and send the readings as IoTF device events
      * with an identifier of {@code sensors}.
      * 
      * @param device
-     *            IoTF device
+     *            IoT device
      * @param print
      *            True if the data submitted as events should also be printed to
      *            standard out.
@@ -109,6 +99,31 @@ public class IotfSensors {
         // with event identifier "sensors".
         device.events(sensors, "sensors", QoS.FIRE_AND_FORGET);
     }
+    
+    /**
+     * Create a heart beat device event with
+     * identifier {@code heartbeat} to
+     * ensure there is some immediate output and
+     * the connection to IoTF happens as soon as possible.
+     * @param device IoT device
+     */
+    public static void heartBeat(IotDevice device, boolean print) {
+        // In addition create a heart beat event to
+        // ensure there is some immediate output and
+        // the connection to IoTF happens as soon as possible.
+        TStream<Date> hb = device.topology().poll(() -> new Date(), 1, TimeUnit.MINUTES);
+        // Convert to JSON
+        TStream<JsonObject> hbj = hb.map(d -> {
+            JsonObject j = new  JsonObject();
+            j.addProperty("when", d.toString());
+            j.addProperty("hearbeat", d.getTime());
+            return j;
+        });
+        if (print)
+            hbj.print();
+        device.events(hbj, "heartbeat", QoS.FIRE_AND_FORGET);
+    }
+    
 
     /**
      * Subscribe to IoTF device commands with identifier {@code display}.

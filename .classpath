@@ -3,6 +3,7 @@
 	<classpathentry kind="src" path="apps/src/main/java"/>
 	<classpathentry kind="src" path="connectors/src/main/java"/>
 	<classpathentry kind="src" path="console/src/main/java"/>
+	<classpathentry kind="src" path="scenarios/src/main/java"/>
 	<classpathentry kind="src" path="topology/src/main/java"/>
 	<classpathentry kind="src" path="utils/src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
@@ -16,5 +17,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/utils"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/runtime"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/provider_iot"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/apps"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

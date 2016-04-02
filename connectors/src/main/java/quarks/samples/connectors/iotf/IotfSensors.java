@@ -54,6 +54,17 @@ import quarks.topology.TStream;
  */
 public class IotfSensors {
 
+    /**
+     * Run the IotfSensors application.
+     * 
+     * Takes a single argument that is the path to the
+     * device configuration file containing the connection
+     * authentication information.
+     * 
+     * @param args Must contain the path to the device configuration file.
+     * 
+     * @see IotfDevice#IotfDevice(quarks.topology.Topology, File)
+     */
     public static void main(String[] args) {
         
         String deviceCfg = args[0];
@@ -72,8 +83,7 @@ public class IotfSensors {
 
         // Subscribe to commands of id "display" for this
         // device and print them to standard out
-        TStream<String> statusMsgs = displayMessages(device);
-        statusMsgs.print();
+        displayMessages(device, true);
 
         tp.submit(topology);
     }
@@ -142,7 +152,7 @@ public class IotfSensors {
      * 
      * @see IotDevice#commands(String...)
      */
-    public static TStream<String> displayMessages(IotDevice device) {
+    public static TStream<String> displayMessages(IotDevice device, boolean print) {
         // Subscribe to commands of id "status" for this device
         TStream<JsonObject> statusMsgs = device.commands("display");
 
@@ -151,6 +161,9 @@ public class IotfSensors {
         // payload.msg - Status message (this is specific to this application)
 
         // Map to a String object containing the message
-        return statusMsgs.map(j -> j.getAsJsonObject("payload").getAsJsonPrimitive("msg").getAsString());
+        TStream<String> messages = statusMsgs.map(j -> j.getAsJsonObject("payload").getAsJsonPrimitive("msg").getAsString());
+        if (print)
+            messages.print();
+        return messages;
     }
 }

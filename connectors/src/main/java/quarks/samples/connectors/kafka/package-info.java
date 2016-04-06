@@ -22,7 +22,7 @@ under the License.
  * <a href="{@docRoot}/quarks/connectors/kafka/package-summary.html">
  *     Apache Kafka stream connector</a>.
  * <p>
- * See &lt;quarks-release>/scripts/connectors/kafka/README to run the samples.
+ * See &lt;quarks-release&gt;/scripts/connectors/kafka/README to run the samples.
  * <p>
  * The following simple samples are provided:
  * <ul>

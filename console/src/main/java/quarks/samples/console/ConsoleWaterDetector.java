@@ -37,7 +37,6 @@ import quarks.metrics.Metrics;
 import quarks.providers.development.DevelopmentProvider;
 import quarks.providers.direct.DirectProvider;
 
-
 import quarks.topology.TStream;
 import quarks.topology.Topology;
 
@@ -54,14 +53,17 @@ import quarks.topology.Topology;
  * </P>
  * <P>
  * Selecting any of these, with the exception of "Static flow", adds a legend to the topology which
- * allows the user to identify elements of the view. 
+ * allows the user to identify elements of the view.
+ * </P>
  * <P> The "Static flow" view shows the toology in an unchanging state - that is if tuple counts are available the
  * lines (connections) representing the edges of the topology are not updated, nor are the circles (representing the vertices) dimensions updated.  
- * The purpose of this view is to give the user an indication of the topology map of the application. 
+ * The purpose of this view is to give the user an indication of the topology map of the application.
+ * </P>
  * <P>
  * The "Oplet kind" view colors the oplets or vertices displayed in the topology graph (the circles) by their
  * corresponding Oplet kind.
  * </P>
+ * <P>
  * If "Tuple count" is selected the legend reflects ranges of tuple counts measured since the application was started.
  * </P>
  * <P>
@@ -75,7 +77,7 @@ import quarks.topology.Topology;
  * are available since the DevelopmentProvider class is being used.  Note that the DevelopmentProvider class adds a Metrics counter
  * to all oplets in the topology, with the exception of certain oplet types.  For further information
  * about how metrics are added to a topology, see the details in the quarks.metrics.Metrics class and the counter method.
- * <br/>
+ * <br>
  * A counter can be added to an individual oplet, and not the entire topology.  For an example of this
  * see the quarks.samples.utils.metrics.DevelopmentMetricsSample.
  * </P>
@@ -233,7 +235,7 @@ public class ConsoleWaterDetector {
 	}
 	
 	/**
-	 * Creates a TStream&ltJsonObject&gt; for each sensor reading for each well. Unions all the TStream&lt;JsonObject&gt into a 
+	 * Creates a TStream&lt;JsonObject&gt; for each sensor reading for each well. Unions all the TStream&lt;JsonObject&gt; into a
 	 * single one representing all readings on the well.
 	 * @param topology Topology providing the tuples for the sensors
 	 * @param wellId Id of the well sending the measurements

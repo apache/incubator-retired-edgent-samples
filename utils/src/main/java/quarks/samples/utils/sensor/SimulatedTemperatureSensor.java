@@ -33,7 +33,7 @@ import quarks.function.Supplier;
  * The sensor starts off with an initial value.
  * Each call to {@link #get()} changes the current value by
  * a random amount between plus/minus a {@code deltaFactor}.
- * The new current value is limited to a {@code maxTempRange}.
+ * The new current value is limited to a {@code tempRange}.
  * </p><p>
  * No temperature scale is implied (e.g., Fahrenheit, Kelvin, ...).
  * The {@code double} temperature values are simply generated as described.
@@ -51,7 +51,7 @@ public class SimulatedTemperatureSensor implements Supplier<Double> {
     private static final long serialVersionUID = 1L;
     private static DecimalFormat df = new DecimalFormat("#.#");
     private Random r = new Random();
-    private final Range<Double> maxTempRange;
+    private final Range<Double> tempRange;
     private final double deltaFactor;
     private double currentTemp;
    
@@ -74,27 +74,27 @@ public class SimulatedTemperatureSensor implements Supplier<Double> {
      * <p>
      * No temperature scale is implied.
      * </p> 
-     * @param initialTemp the initial temperature.  Must be within maxTempRange.
-     * @param maxTempRange maximum sensor value range
+     * @param initialTemp the initial temperature.  Must be within tempRange.
+     * @param tempRange maximum sensor value range
      * @param deltaFactor maximum plus/minus change on each {@code get()}.
      *              e.g., 1.0 to limit change to +/- 1.0.
      *              Must be > 0.0
      */
     public SimulatedTemperatureSensor(double initialTemp,
-            Range<Double> maxTempRange, double deltaFactor) {
-        this.currentTemp = initialTemp;
-        this.maxTempRange = maxTempRange;
-        this.deltaFactor = deltaFactor;
-        Objects.requireNonNull(maxTempRange, "maxTempRange");
-        if (!maxTempRange.contains(currentTemp))
-            throw new IllegalArgumentException("currentTemp");
+            Range<Double> tempRange, double deltaFactor) {
+        Objects.requireNonNull(tempRange, "tempRange");
+        if (!tempRange.contains(initialTemp))
+            throw new IllegalArgumentException("initialTemp");
         if (deltaFactor <= 0.0)
             throw new IllegalArgumentException("deltaFactor");
+        this.currentTemp = initialTemp;
+        this.tempRange = tempRange;
+        this.deltaFactor = deltaFactor;
     }
     
-    /** Get the maxTempRange setting */
-    public Range<Double> getMaxTempRange() {
-        return maxTempRange;
+    /** Get the tempRange setting */
+    public Range<Double> getTempRange() {
+        return tempRange;
     }
     
     /** Get the deltaFactor setting */
@@ -107,10 +107,10 @@ public class SimulatedTemperatureSensor implements Supplier<Double> {
     public Double get() {
         double delta = 2 * r.nextDouble() - 1.0; // between -1.0 and 1.0
         double newTemp = delta * deltaFactor + currentTemp;
-        if (!maxTempRange.contains(newTemp)) {
+        if (!tempRange.contains(newTemp)) {
             newTemp = newTemp > currentTemp
-                        ? maxTempRange.upperEndpoint()
-                        : maxTempRange.lowerEndpoint();
+                        ? tempRange.upperEndpoint()
+                        : tempRange.lowerEndpoint();
         }
         currentTemp = Double.valueOf(df.format(newTemp));
         return currentTemp;

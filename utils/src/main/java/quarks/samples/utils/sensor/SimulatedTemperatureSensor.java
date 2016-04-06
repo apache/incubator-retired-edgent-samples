@@ -34,17 +34,18 @@ import quarks.function.Supplier;
  * Each call to {@link #get()} changes the current value by
  * a random amount between plus/minus a {@code deltaFactor}.
  * The new current value is limited to a {@code maxTempRange}.
- * <p>
+ * </p><p>
  * No temperature scale is implied (e.g., Fahrenheit, Kelvin, ...).
  * The {@code double} temperature values are simply generated as described.
  * The user of the class decides how to interpret them.
- * <p>
+ * </p><p>
  * Sample use:
  * <pre>{@code
  * Topology t = ...;
  * SimulatedTemperatureSensor tempSensor = new SimulatedTemperatureSensor();
  * TStream<Double> temp = t.poll(tempSensor, 1, TimeUnit.SECONDS);
  * }</pre>
+ * </p>
  */
 public class SimulatedTemperatureSensor implements Supplier<Double> {
     private static final long serialVersionUID = 1L;
@@ -59,9 +60,10 @@ public class SimulatedTemperatureSensor implements Supplier<Double> {
      * <p>
      * Same as {@code SimulatedTemperatureSensor(80.0, 
      *              Ranges.closed(28.0, 112.0), 1.0)}
-     * <p>
+     * </p><p>
      * These default values roughly correspond to normal air temperature
      * in the Fahrenheit scale.
+     * </p>
      */
     public SimulatedTemperatureSensor() {
         this(80.0, Ranges.closed(28.0, 112.0), 1.0);
@@ -70,7 +72,8 @@ public class SimulatedTemperatureSensor implements Supplier<Double> {
     /**
      * Create a temperature sensor.
      * <p>
-     * No temperature scale is implied. 
+     * No temperature scale is implied.
+     * </p> 
      * @param initialTemp the initial temperature.  Must be within maxTempRange.
      * @param maxTempRange maximum sensor value range
      * @param deltaFactor maximum plus/minus change on each {@code get()}.

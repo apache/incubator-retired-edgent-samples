@@ -19,9 +19,7 @@ under the License.
 
 package quarks.samples.utils.sensor;
 
-import java.text.DecimalFormat;
 import java.util.Objects;
-import java.util.Random;
 
 import quarks.analytics.sensors.Range;
 import quarks.analytics.sensors.Ranges;
@@ -33,7 +31,8 @@ import quarks.function.Supplier;
  * The sensor starts off with an initial value.
  * Each call to {@link #get()} changes the current value by
  * a random amount between plus/minus a {@code deltaFactor}.
- * The new current value is limited to a {@code tempRange}.
+ * The new current value is limited to a {@code tempRange}
+ * and then rounded to 1 fractional digit.
  * </p><p>
  * No temperature scale is implied (e.g., Fahrenheit, Kelvin, ...).
  * The {@code double} temperature values are simply generated as described.
@@ -46,14 +45,11 @@ import quarks.function.Supplier;
  * TStream<Double> temp = t.poll(tempSensor, 1, TimeUnit.SECONDS);
  * }</pre>
  * </p>
+ * @see SimpleSimulatedSensor
  */
 public class SimulatedTemperatureSensor implements Supplier<Double> {
     private static final long serialVersionUID = 1L;
-    private static DecimalFormat df = new DecimalFormat("#.#");
-    private Random r = new Random();
-    private final Range<Double> tempRange;
-    private final double deltaFactor;
-    private double currentTemp;
+    private final SimpleSimulatedSensor sensor;
    
     /**
      * Create a temperature sensor.
@@ -87,32 +83,22 @@ public class SimulatedTemperatureSensor implements Supplier<Double> {
             throw new IllegalArgumentException("initialTemp");
         if (deltaFactor <= 0.0)
             throw new IllegalArgumentException("deltaFactor");
-        this.currentTemp = initialTemp;
-        this.tempRange = tempRange;
-        this.deltaFactor = deltaFactor;
+        sensor = new SimpleSimulatedSensor(initialTemp, deltaFactor, tempRange);
     }
     
     /** Get the tempRange setting */
     public Range<Double> getTempRange() {
-        return tempRange;
+        return sensor.getRange();
     }
     
     /** Get the deltaFactor setting */
     public double getDeltaFactor() {
-        return deltaFactor;
+        return sensor.getDeltaFactor();
     }
     
     /** Get the next sensor value. */
     @Override
     public Double get() {
-        double delta = 2 * r.nextDouble() - 1.0; // between -1.0 and 1.0
-        double newTemp = delta * deltaFactor + currentTemp;
-        if (!tempRange.contains(newTemp)) {
-            newTemp = newTemp > currentTemp
-                        ? tempRange.upperEndpoint()
-                        : tempRange.lowerEndpoint();
-        }
-        currentTemp = Double.valueOf(df.format(newTemp));
-        return currentTemp;
+        return sensor.get();
     }
 }

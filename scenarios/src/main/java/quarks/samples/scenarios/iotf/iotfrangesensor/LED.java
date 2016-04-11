@@ -1,4 +1,4 @@
-package quarks.samples.scenarios.iotf.iotfRangeSensor;
+package quarks.samples.scenarios.iotf.iotfrangesensor;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;

@@ -62,7 +62,7 @@ public class SimpleSimulatedSensor implements Supplier<Double> {
     /**
      * Create a sensor.
      * <p>
-     * Same as {@code SimpleSimulatedSensor(0.0, 1.0, null);
+     * Same as {@code SimpleSimulatedSensor(0.0, 1.0, null)};
      * </p>
      */
     public SimpleSimulatedSensor() {
@@ -72,7 +72,7 @@ public class SimpleSimulatedSensor implements Supplier<Double> {
     /**
      * Create a sensor.
      * <p>
-     * Same as {@code SimpleSimulatedSensor(initialValue, 1.0, null);
+     * Same as {@code SimpleSimulatedSensor(initialValue, 1.0, null)};
      * </p>
      * @param initialValue the initial value
      */
@@ -84,7 +84,7 @@ public class SimpleSimulatedSensor implements Supplier<Double> {
      * Create a sensor.
      * 
      * <p>
-     * Same as {@code SimpleSimulatedSensor(initialValue, deltaFactor, null);
+     * Same as {@code SimpleSimulatedSensor(initialValue, deltaFactor, null)};
      * </p>
      * @param initialValue the initial value.
      * @param deltaFactor maximum plus/minus change on each {@code get()}.
@@ -99,7 +99,7 @@ public class SimpleSimulatedSensor implements Supplier<Double> {
      * Create a sensor.
      * 
      * @param initialValue the initial value.  Must be within range.
-     * @param deltaFactor maximum plus/minus change on each {@code get()}.
+     * @param deltaFactor maximum plus/minus change on each {@link #get()}.
      *              e.g., 1.0 to limit change to +/- 1.0.
      *              Must be > 0.0
      * @param range maximum sensor value range. Unlimited if null.

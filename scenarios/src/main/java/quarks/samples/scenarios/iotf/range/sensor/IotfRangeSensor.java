@@ -1,4 +1,4 @@
-package quarks.samples.scenarios.iotf.iotfrangesensor;
+package quarks.samples.scenarios.iotf.range.sensor;
 
 import static quarks.analytics.math3.stat.Statistic.MAX;
 import static quarks.analytics.math3.stat.Statistic.MEAN;

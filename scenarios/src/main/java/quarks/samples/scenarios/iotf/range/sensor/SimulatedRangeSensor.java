@@ -1,4 +1,4 @@
-package quarks.samples.scenarios.iotf.iotfrangesensor;
+package quarks.samples.scenarios.iotf.range.sensor;
 
 import java.util.Random;
 

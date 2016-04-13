@@ -20,7 +20,7 @@
     </description>
 
   <property name="component.path" value="samples"/>
-  <property name="src.excludes" value="**/iotfrangesensor/**"/>
+  <property name="src.excludes" value="**/range/sensor/**"/>
   <import file="../../common-build.xml"/>
 
   <path id="compile.classpath">

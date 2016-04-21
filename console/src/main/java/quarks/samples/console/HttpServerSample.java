@@ -19,9 +19,14 @@ under the License.
 
 package quarks.samples.console;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import quarks.console.server.HttpServer;
 
 public class HttpServerSample {
+	private static final Logger logger = LoggerFactory.getLogger(HttpServerSample.class);
+
     public static void main(String[] args)  {
 
         try {
@@ -32,7 +37,7 @@ public class HttpServerSample {
         System.out.println(consolePath);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Exception caught: {}", e);
         }
     }
 }

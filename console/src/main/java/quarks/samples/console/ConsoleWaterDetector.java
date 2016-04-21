@@ -27,6 +27,9 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.codahale.metrics.Counter;
 import com.codahale.metrics.MetricRegistry;
 import com.google.gson.JsonElement;
@@ -157,6 +160,8 @@ public class ConsoleWaterDetector {
 	static int LEAD_RANDOM_HIGH = 15;
 	static String LEAD_ALERT_TAG = "LEAD out of range";
 	
+	private static final Logger logger = LoggerFactory.getLogger(ConsoleWaterDetector.class);
+
 	public static void main(String[] args) throws Exception {
 		DirectProvider dp = new DevelopmentProvider();
 		
@@ -167,7 +172,7 @@ public class ConsoleWaterDetector {
             writer.println(dp.getServices().getService(HttpServer.class).getConsoleUrl());
             writer.close();
         } catch ( Exception e) {
-            e.printStackTrace();
+            logger.error("Exception caught: {}", e);
         }
 		
 		Topology wellTopology = dp.newTopology("ConsoleWaterDetector");

@@ -124,7 +124,7 @@ public abstract class AbstractApplication {
     abstract protected void buildTopology(Topology t);
     
     public void handleRuntimeError(String msg, Exception e) {
-        logger.error("A runtime error occurred. {}", e);
+        logger.error("A runtime error occurred", e);
     }
 
 }

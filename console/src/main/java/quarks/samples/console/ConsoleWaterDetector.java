@@ -172,7 +172,7 @@ public class ConsoleWaterDetector {
             writer.println(dp.getServices().getService(HttpServer.class).getConsoleUrl());
             writer.close();
         } catch ( Exception e) {
-            logger.error("Exception caught: {}", e);
+            logger.error("Exception caught", e);
         }
 		
 		Topology wellTopology = dp.newTopology("ConsoleWaterDetector");

@@ -19,7 +19,7 @@
     <description>
         Build scenario applications.
     </description>
-	<property environment="env"/>	
+  <property environment="env"/>	
   <property name="component.path" value="samples"/>
   <condition property="src.excludes" value="**/range/sensor/**">
     <not>
@@ -28,14 +28,12 @@
   </condition>
   <import file="../../common-build.xml"/>
 
-
-	
   <path id="compile.classpath">
     <path refid="quarks.samples.classpath"/>
     <pathelement location="${quarks.samples}/lib/quarks.samples.connectors.jar"/>
     <pathelement location="${quarks.lib}/quarks.providers.iot.jar"/>
     <pathelement location="${quarks.connectors}/iotf/lib/quarks.connectors.iotf.jar"/>
-  	<pathelement location="${env.PI4J_LIB}/pi4j-core.jar"/>
+    <pathelement location="${env.PI4J_LIB}/pi4j-core.jar"/>
   </path>
 
   <path id="test.compile.classpath">
@@ -50,4 +48,3 @@
   </path>
 
 </project>
-

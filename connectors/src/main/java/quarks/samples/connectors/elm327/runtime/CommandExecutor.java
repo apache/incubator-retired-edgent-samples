@@ -29,7 +29,7 @@ import quarks.samples.connectors.elm327.Cmd;
 import quarks.samples.connectors.elm327.Elm327Cmds;
 
 /**
- * Runtime execution of ELM327 & OBD-II commands.
+ * Runtime execution of ELM327 &amp; OBD-II commands.
  *
  */
 public class CommandExecutor {

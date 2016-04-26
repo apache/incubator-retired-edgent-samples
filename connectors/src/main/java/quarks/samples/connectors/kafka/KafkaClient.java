@@ -54,6 +54,7 @@ import quarks.samples.connectors.Options;
  * } - Run directly from the command line.
  * </LI>
  * </UL>
+ * <UL>
  * <LI>
  * An application execution within your IDE once you set the class path to include the correct jars.</LI>
  * </UL>

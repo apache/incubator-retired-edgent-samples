@@ -47,11 +47,13 @@ import quarks.samples.connectors.Options;
  *  quarks.samples.connectors.mqtt.MqttClient -h
  * } - Run directly from the command line.
  * </LI>
+ * <LI>
  * Specify absolute pathnames if using the {@code trustStore}
  * or {@code keyStore} arguments.
- * </UL>
+ * </LI>
  * <LI>
- * An application execution within your IDE once you set the class path to include the correct jars.</LI>
+ * An application execution within your IDE once you set the class path to include the correct jars.
+ * </LI>
  * </UL>
  */
 public class MqttClient {

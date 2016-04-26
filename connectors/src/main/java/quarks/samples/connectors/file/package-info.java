@@ -21,7 +21,7 @@ under the License.
  * <a href="{@docRoot}/quarks/connectors/file/package-summary.html">
  *     File stream connector</a>.
  * <p>
- * See &lt;quarks-release>/scripts/connectors/file/README to run the samples.
+ * See &lt;quarks-release&gt;/scripts/connectors/file/README to run the samples.
  * <p>
  * The following samples are provided:
  * <ul>

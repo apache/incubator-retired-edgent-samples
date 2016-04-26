@@ -21,7 +21,7 @@ package quarks.samples.connectors;
 import quarks.function.Supplier;
 
 /**
- * A Supplier<String> for creating sample messages to publish.
+ * A Supplier&lt;String&gt; for creating sample messages to publish.
  */
 public class MsgSupplier implements Supplier<String> {
     private static final long serialVersionUID = 1L;

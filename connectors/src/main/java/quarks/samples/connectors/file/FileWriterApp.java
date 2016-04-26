@@ -34,7 +34,7 @@ import quarks.topology.TStream;
 import quarks.topology.Topology;
 
 /**
- * Write a TStream<String> to files.
+ * Write a TStream&lt;String&gt; to files.
  */
 public class FileWriterApp {
     private final String directory;

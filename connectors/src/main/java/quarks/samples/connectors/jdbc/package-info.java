@@ -21,7 +21,7 @@ under the License.
  * <a href="{@docRoot}/quarks/connectors/jdbc/package-summary.html">
  *     JDBC stream connector</a>.
  * <p>
- * See &lt;quarks-release>/scripts/connectors/jdbc/README to run the samples.
+ * See &lt;quarks-release&gt;/scripts/connectors/jdbc/README to run the samples.
  * <p>
  * The following samples are provided:
  * <ul>

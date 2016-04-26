@@ -44,89 +44,89 @@ import quarks.topology.TStream;
 import quarks.topology.TWindow;
 
 public class IotfRangeSensor {
-    private static final Pin echoPin = RaspiPin.GPIO_05; // PI4J custom numbering (pin 18 on RPi2)
-    private static final Pin trigPin = RaspiPin.GPIO_04; // PI4J custom numbering (pin 16 on RPi2)
-    private static final Pin ledPin = RaspiPin.GPIO_01; // PI4J custom numbering (pin 12 on RPi2)
-    
-	public static void main(String[] args) {
-		
-		 	if(args.length != 3)
-		    {
-		        System.out.println("Proper Usage is:\n   "
-		        		+ "   java program device.cfg sensorIsSimulated LEDIsSimulated\n"
-		        		+ "Example: \n"
-		        		+ "   java -cp $QUARKS/target/java8/samples/lib/'*':$PI4J_LIB/'*':bin/ com.ibm.streamsx.iotf.range.IotfRangeSensor device.cfg false true");
-		        System.exit(0);
-		    }
-	        
+    private static final Pin echoPin = RaspiPin.GPIO_05; // PI4J custom
+                                                         // numbering (pin 18 on
+                                                         // RPi2)
+    private static final Pin trigPin = RaspiPin.GPIO_04; // PI4J custom
+                                                         // numbering (pin 16 on
+                                                         // RPi2)
+    private static final Pin ledPin = RaspiPin.GPIO_01; // PI4J custom numbering
+                                                        // (pin 12 on RPi2)
 
-	        String deviceCfg = args[0];
-	        Boolean simulatedRange = Boolean.parseBoolean(args[1]);
-	        Boolean simulatedLED = Boolean.parseBoolean(args[2]);
-	        
-	        DirectProvider tp = new DirectProvider();
-	        DirectTopology topology = tp.newTopology("IotfRangeSensor");
-	        
-	        IotDevice device = getIotDevice(deviceCfg, topology);
-	
-	        // HC-SR04 Range sensor for this device.
-	        rangeSensor(device, simulatedRange, true);
-	        
-	        // In addition create a heart beat event to
-	        // ensure there is some immediate output and
-	        // the connection to IoTF happens as soon as possible.
-	        TStream<Date> hb = topology.poll(() -> new Date(), 1, TimeUnit.MINUTES);
-	        
-	        // Convert to JSON
-	        TStream<JsonObject> hbj = hb.map(d -> {
-	            JsonObject j = new  JsonObject();
-	            j.addProperty("when", d.toString());
-	            j.addProperty("hearbeat", d.getTime());
-	            return j;
-	        });
-	        hbj.print();
-	        device.events(hbj, "heartbeat", QoS.FIRE_AND_FORGET);
-	
-	        // Subscribe to commands of id "display" for this
-	        // device and print them to standard out
-	        TStream<String> statusMsgs = displayMessages(device);
-	        statusMsgs.print();
-	        
-	        
-	        //Flash an LED for 1second when we receive commands from IoTF
-	        if (!simulatedLED){
-	        	LED led = new LED(ledPin);
-	        	statusMsgs.sink(j -> led.flash(1000));
-	        } else {
-	        	statusMsgs.sink(j -> System.out.println("*******Simulated LED Flash!*******"));
-	        }
-	
-	        tp.submit(topology);
-	    }
+    public static void main(String[] args) {
 
-	/*
-	 * Returns an IotDevice based on the device config parameter.
-	 * If the type is "quickstart" then we also output the URL to view the data. 
-	 */
-	private static IotDevice getIotDevice(String deviceCfg, DirectTopology topology) {
-		IotDevice device;
-		
-		if (deviceCfg.equalsIgnoreCase("quickstart")){
-		    // Declare a connection to IoTF Quickstart service
-		    String deviceId = "qs" + Long.toHexString(new Random().nextLong());
-		    device = IotfDevice.quickstart(topology, deviceId);
-		    
-		    System.out.println("Quickstart device type:" + IotfDevice.QUICKSTART_DEVICE_TYPE);
-		    System.out.println("Quickstart device id  :" + deviceId);
-		    System.out.println("https://quickstart.internetofthings.ibmcloud.com/#/device/"
-		         + deviceId);
-		} else {
-			// Declare a connection to IoTF
-			device = new IotfDevice(topology, new File(deviceCfg));
-		}
-		
-		return device;
-	}
+        if (args.length != 3) {
+            System.out.println("Proper Usage is:\n   " + "   java program device.cfg sensorIsSimulated LEDIsSimulated\n"
+                    + "Example: \n"
+                    + "   java -cp $QUARKS/target/java8/samples/lib/'*':$PI4J_LIB/'*':bin/ com.ibm.streamsx.iotf.range.IotfRangeSensor device.cfg false true");
+            System.exit(0);
+        }
+
+        String deviceCfg = args[0];
+        Boolean simulatedRange = Boolean.parseBoolean(args[1]);
+        Boolean simulatedLED = Boolean.parseBoolean(args[2]);
+
+        DirectProvider tp = new DirectProvider();
+        DirectTopology topology = tp.newTopology("IotfRangeSensor");
+
+        IotDevice device = getIotDevice(deviceCfg, topology);
+
+        // HC-SR04 Range sensor for this device.
+        rangeSensor(device, simulatedRange, true);
+
+        // In addition create a heart beat event to
+        // ensure there is some immediate output and
+        // the connection to IoTF happens as soon as possible.
+        TStream<Date> hb = topology.poll(() -> new Date(), 1, TimeUnit.MINUTES);
+
+        // Convert to JSON
+        TStream<JsonObject> hbj = hb.map(d -> {
+            JsonObject j = new JsonObject();
+            j.addProperty("when", d.toString());
+            j.addProperty("hearbeat", d.getTime());
+            return j;
+        });
+        hbj.print();
+        device.events(hbj, "heartbeat", QoS.FIRE_AND_FORGET);
+
+        // Subscribe to commands of id "display" for this
+        // device and print them to standard out
+        TStream<String> statusMsgs = displayMessages(device);
+        statusMsgs.print();
+
+        // Flash an LED for 1second when we receive commands from IoTF
+        if (!simulatedLED) {
+            LED led = new LED(ledPin);
+            statusMsgs.sink(j -> led.flash(1000));
+        } else {
+            statusMsgs.sink(j -> System.out.println("*******Simulated LED Flash!*******"));
+        }
+
+        tp.submit(topology);
+    }
+
+    /*
+     * Returns an IotDevice based on the device config parameter. If the type is
+     * "quickstart" then we also output the URL to view the data.
+     */
+    private static IotDevice getIotDevice(String deviceCfg, DirectTopology topology) {
+        IotDevice device;
+
+        if (deviceCfg.equalsIgnoreCase("quickstart")) {
+            // Declare a connection to IoTF Quickstart service
+            String deviceId = "qs" + Long.toHexString(new Random().nextLong());
+            device = IotfDevice.quickstart(topology, deviceId);
+
+            System.out.println("Quickstart device type:" + IotfDevice.QUICKSTART_DEVICE_TYPE);
+            System.out.println("Quickstart device id  :" + deviceId);
+            System.out.println("https://quickstart.internetofthings.ibmcloud.com/#/device/" + deviceId);
+        } else {
+            // Declare a connection to IoTF
+            device = new IotfDevice(topology, new File(deviceCfg));
+        }
+
+        return device;
+    }
 
     /**
      * Connect to an HC-SR04 Range Sensor
@@ -138,41 +138,45 @@ public class IotfRangeSensor {
      *            standard out.
      */
     public static void rangeSensor(IotDevice device, boolean simulated, boolean print) {
-    	
-		Supplier<Double> sensor;
-		
-		if (simulated){
-			sensor = new SimulatedRangeSensor(); 
-		} else {
-			sensor = new RangeSensor(echoPin, trigPin);
-		}
-		
-		TStream<Double> distanceReadings = device.topology().poll(sensor, 1, TimeUnit.SECONDS);
-		distanceReadings.print();
-		
-		//filter out bad readings that are out of the sensor's 4m range
-		distanceReadings = distanceReadings.filter(j -> j < 400.0);
-		
-		TStream<JsonObject> sensorJSON = distanceReadings.map(v -> {
-			JsonObject j = new JsonObject();
-			j.addProperty("name", "rangeSensor");
-			j.addProperty("reading", v);
-			return j;
-		});
-        
+
+        Supplier<Double> sensor;
+
+        if (simulated) {
+            sensor = new SimulatedRangeSensor();
+        } else {
+            sensor = new RangeSensor(echoPin, trigPin);
+        }
+
+        TStream<Double> distanceReadings = device.topology().poll(sensor, 1, TimeUnit.SECONDS);
+        distanceReadings.print();
+
+        // filter out bad readings that are out of the sensor's 4m range
+        distanceReadings = distanceReadings.filter(j -> j < 400.0);
+
+        TStream<JsonObject> sensorJSON = distanceReadings.map(v -> {
+            JsonObject j = new JsonObject();
+            j.addProperty("name", "rangeSensor");
+            j.addProperty("reading", v);
+            return j;
+        });
+
         // Create a window on the stream of the last 10 readings partitioned
-        // by sensor name. In this case we only have one range sensor so there will be one partition. 
-        TWindow<JsonObject,JsonElement> sensorWindow = sensorJSON.last(10, j -> j.get("name"));
-        
-        // Aggregate the windows calculating the min, max, mean and standard deviation
+        // by sensor name. In this case we only have one range sensor so there
+        // will be one partition.
+        TWindow<JsonObject, JsonElement> sensorWindow = sensorJSON.last(10, j -> j.get("name"));
+
+        // Aggregate the windows calculating the min, max, mean and standard
+        // deviation
         // across each window independently.
         sensorJSON = JsonAnalytics.aggregate(sensorWindow, "name", "reading", MIN, MAX, MEAN, STDDEV);
-        
-        // Filter so that only when the mean sensor reading is that an object is closer than 30cm send data. 
-        sensorJSON = sensorJSON.filter(j -> Math.abs(j.get("reading").getAsJsonObject().get("MEAN").getAsDouble()) < 30.0);
-        
+
+        // Filter so that only when the mean sensor reading is that an object is
+        // closer than 30cm send data.
+        sensorJSON = sensorJSON
+                .filter(j -> Math.abs(j.get("reading").getAsJsonObject().get("MEAN").getAsDouble()) < 30.0);
+
         if (print)
-        	sensorJSON.print();
+            sensorJSON.print();
 
         // Send the device streams as IoTF device events
         // with event identifier "sensors".

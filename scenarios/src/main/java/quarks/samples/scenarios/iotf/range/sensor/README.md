@@ -12,7 +12,7 @@ See Recipe this was created for [here](https://developer.ibm.com/recipes/tutoria
 To compile, export your Quarks install and PI4J libraries (on Raspberry Pi, the default Pi4J location is `/opt/pi4j/lib`):
 
 `$ export QUARKS=<quarks-root-dir>`
-
+ 
 `$ export PI4J_LIB=<Pi4J-libs>`
 
 `$ cd $QUARKS`

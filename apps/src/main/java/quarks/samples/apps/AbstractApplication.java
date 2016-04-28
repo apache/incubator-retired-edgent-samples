@@ -22,6 +22,9 @@ import java.io.File;
 import java.nio.file.Files;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import quarks.console.server.HttpServer;
 import quarks.providers.direct.DirectProvider;
 import quarks.samples.apps.mqtt.AbstractMqttApplication;
@@ -49,6 +52,7 @@ public abstract class AbstractApplication {
     protected final String propsPath;
     protected final Properties props;
     private final ApplicationUtilities applicationUtilities;
+    private static final Logger logger = LoggerFactory.getLogger(AbstractApplication.class);
 
     protected Topology t;
     
@@ -120,9 +124,7 @@ public abstract class AbstractApplication {
     abstract protected void buildTopology(Topology t);
     
     public void handleRuntimeError(String msg, Exception e) {
-        // TODO
-        System.err.println("A runtime error occurred. " + msg + ":" + e.getLocalizedMessage());
-        e.printStackTrace();
+        logger.error("A runtime error occurred", e);
     }
 
 }

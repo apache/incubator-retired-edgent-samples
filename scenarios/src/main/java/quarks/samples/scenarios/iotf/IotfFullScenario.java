@@ -71,7 +71,7 @@ public class IotfFullScenario {
         registerDisplay(provider);
         
         // Start this provider
-        // the two applications will not start
+        // the three applications will not start
         provider.start();
     }
     

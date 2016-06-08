@@ -1,0 +1,9 @@
+dependencies {
+  compile project(':providers:development')
+  compile project(':providers:direct')
+  compile project(':samples:connectors')
+  compile project(':providers:iot')
+  compile project(':connectors:iotf')
+  compile 'com.pi4j:pi4j-core:1.0'
+  compile ext_classpath
+}

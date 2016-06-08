@@ -1,0 +1,13 @@
+dependencies {
+  compile project(':providers:development')
+  compile project(':providers:direct')
+  compile project(':connectors:mqtt')
+  compile project(':connectors:kafka')
+  compile project(':connectors:file')
+  compile project(':connectors:iotf')
+  compile project(':connectors:jdbc')
+  compile project(':connectors:serial')
+  compile project(':samples:topology')
+  compile project(':samples:utils')
+  compile ext_classpath
+}

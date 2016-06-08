@@ -1,0 +1,6 @@
+dependencies {
+  compile project(':providers:development')
+  compile project(':providers:direct')
+  compile project(':console:server')
+  compile ext_classpath
+}

@@ -1,0 +1,8 @@
+dependencies {
+  compile project(':providers:development')
+  compile project(':providers:direct')
+  compile project(':analytics:math3')
+  compile project(':runtime:jobregistry')
+  compile project(':samples:utils')
+  compile ext_classpath
+}

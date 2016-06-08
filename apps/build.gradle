@@ -1,0 +1,11 @@
+dependencies {
+  compile project(':providers:development')
+  compile project(':providers:direct')
+  compile project(':connectors:mqtt')
+  compile project(':connectors:file')
+  compile project(':connectors:serial')
+  compile project(':analytics:math3')
+  compile project(':analytics:sensors')
+  compile project(':samples:utils')
+  compile ext_classpath
+}

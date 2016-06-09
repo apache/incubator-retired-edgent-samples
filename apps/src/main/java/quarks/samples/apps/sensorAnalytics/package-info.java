@@ -86,7 +86,7 @@ under the License.
  * The application generates some output on stdout and stderr.
  * The information includes:
  * <ul>
- * <li>MQTT device info. Lines 1 through 5 below.</li>
+ * <li>MQTT device info. Lines 1 through 5 in the sample console output below.</li>
  * <li>URL for the Quarks development console.  Line 6.</li>
  * <li>Trace of the outlier event stream. Line 7.
  *     The output is a label, which includes the active threshold range,

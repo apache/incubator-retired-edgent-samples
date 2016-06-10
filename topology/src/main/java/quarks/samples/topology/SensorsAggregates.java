@@ -62,6 +62,8 @@ public class SensorsAggregates {
 	
 	/**
 	 * Run a topology with two bursty sensors printing them to standard out.
+   * @param args command arguments
+   * @throws Exception on failure
 	 */
     public static void main(String[] args) throws Exception {
     	

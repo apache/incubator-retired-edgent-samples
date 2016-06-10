@@ -48,7 +48,7 @@ public class Runner {
     /**
      * Build and run the publisher or subscriber application.
      * @param options command line options
-     * @throws Exception
+     * @throws Exception on failure
      */
     public static void run(Options options) throws Exception {
         boolean isPub = options.get(OPT_PUB); 

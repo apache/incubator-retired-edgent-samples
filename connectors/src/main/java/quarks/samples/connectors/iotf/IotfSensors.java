@@ -116,6 +116,7 @@ public class IotfSensors {
      * ensure there is some immediate output and
      * the connection to IoTF happens as soon as possible.
      * @param device IoT device
+     * @param print true to print generated heartbeat tuples to System.out.
      */
     public static void heartBeat(IotDevice device, boolean print) {
         // In addition create a heart beat event to
@@ -149,11 +150,14 @@ public class IotfSensors {
      * Note to receive commands a analytic application must exist that generates
      * them through IBM Watson IoT Platform.
      * </P>
-     * 
+     *
+     * @param device the device
+     * @param print true to print the received command's payload to System.out.
+     * @return the stream
      * @see IotDevice#commands(String...)
      */
     public static TStream<String> displayMessages(IotDevice device, boolean print) {
-        // Subscribe to commands of id "status" for this device
+        // Subscribe to commands of id "display" for this device
         TStream<JsonObject> statusMsgs = device.commands("display");
 
         // The returned JSON object includes several fields

@@ -42,8 +42,8 @@ public class Util {
      * Wait for the job to reach the specified state.
      * <p>
      * A placeholder till GraphJob directly supports awaitState()?
-     * @param job
-     * @param state
+     * @param job the job
+     * @param state the state to wait for
      * @param timeout specify -1 to wait forever (until interrupted)
      * @param unit may be null if timeout is -1
      * @return true if the state was reached, false otherwise: the time limit

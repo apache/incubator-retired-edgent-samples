@@ -68,7 +68,7 @@ under the License.
  * <p>
  * Edit {@code <quarks-release>/java8/scripts/apps/sensorAnalytics/sensoranalytics.properties}
  * to change the broker location or topic prefix.
- * <p>
+ * 
  * <h2>Application output:</h2>
  * <p>
  * The application periodically (every 30sec), publishes a list of
@@ -116,9 +116,8 @@ under the License.
  * [9] ===== Changing isPublish1hzOutsideRange to true ======
  * ...
  * }</pre>
- * <p>
+ * 
  * <h2>Running, observing and controlling the application:</h2>
- * <p>
  * <pre>{@code
  * $ ./runSensorAnalytics.sh
  * }</pre>
@@ -143,7 +142,7 @@ under the License.
  * <pre>{@code
  * $ ./runDeviceComms.sh send sensor1.setPublish1hzOutsideRange true
  * }</pre>
- * <p>
+ * 
  * <h3>Alternative MQTT clients</h3>
  * You can use any MQTT client but you will have to specify the 
  * MQTT server, the event topics to watch / subscribe to, and the command topics

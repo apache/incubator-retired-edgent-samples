@@ -30,6 +30,8 @@ public class HelloQuarks {
 
 	/**
 	 * Print "Hello Quarks!" as two tuples.
+   * @param args command arguments
+   * @throws Exception on failure
 	 */
     public static void main(String[] args) throws Exception {
 

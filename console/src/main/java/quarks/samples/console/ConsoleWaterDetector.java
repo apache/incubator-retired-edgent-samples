@@ -39,7 +39,6 @@ import quarks.console.server.HttpServer;
 import quarks.metrics.Metrics;
 import quarks.providers.development.DevelopmentProvider;
 import quarks.providers.direct.DirectProvider;
-
 import quarks.topology.TStream;
 import quarks.topology.Topology;
 
@@ -53,7 +52,6 @@ import quarks.topology.Topology;
  * <li>Tuple count</li>
  * <li>Oplet kind</li>
  * </ul>
- * </P>
  * <P>
  * Selecting any of these, with the exception of "Static flow", adds a legend to the topology which
  * allows the user to identify elements of the view.
@@ -105,7 +103,6 @@ import quarks.topology.Topology;
  * <li>Ecoli</li>
  * <li>Lead</li>
  * </ul>
- * </P>
  * <P>
  * This application topology monitors 3 wells:
  * <ul>
@@ -131,7 +128,6 @@ import quarks.topology.Topology;
  * Each stream that is produced from the split prints out the value for the sensor reading that it is monitoring along with the wellId.
  * </li>
  * </ul>
- * </P>
  *
  */
 

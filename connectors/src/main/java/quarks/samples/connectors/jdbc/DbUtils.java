@@ -39,7 +39,7 @@ public class DbUtils {
      * 
      * @param props configuration properties
      * @return the DataSource
-     * @throws Exception
+     * @throws Exception on failure
      */
     public static DataSource getDataSource(Properties props) throws Exception {
         return createDerbyEmbeddedDataSource(props);
@@ -50,7 +50,7 @@ public class DbUtils {
      * <p>
      * Tables are created as needed and purged.
      * @param ds the DataSource
-     * @throws Exception
+     * @throws Exception on failure
      */
     public static void initDb(DataSource ds) throws Exception {
         createTables(ds);
@@ -60,7 +60,7 @@ public class DbUtils {
     /**
      * Purge the sample's tables
      * @param ds the DataSource
-     * @throws Exception
+     * @throws Exception on failure
      */
     public static void purgeTables(DataSource ds) throws Exception {
         try (Connection cn = ds.getConnection()) {

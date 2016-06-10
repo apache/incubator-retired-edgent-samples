@@ -31,13 +31,13 @@ import quarks.topology.Topology;
  *
  */
 public class PeriodicSource {
-	/**
-	 * Shows polling a data source to periodically obtain a value.
-	 * Polls a random number generator for a new value every second
-	 * and then prints out the raw value and a filtered and transformed stream.
-   * @param args command arguments
-   * @throws Exception on failure
-	 */
+    /**
+     * Shows polling a data source to periodically obtain a value.
+     * Polls a random number generator for a new value every second
+     * and then prints out the raw value and a filtered and transformed stream.
+     * @param args command arguments
+     * @throws Exception on failure
+     */
     public static void main(String[] args) throws Exception {
 
         DirectProvider tp = new DirectProvider();

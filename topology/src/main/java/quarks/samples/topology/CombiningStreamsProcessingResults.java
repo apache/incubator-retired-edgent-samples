@@ -44,6 +44,8 @@ public class CombiningStreamsProcessingResults {
      * Applies different processing on each stream to generate alert streams.
      * Combines the alert streams into a single stream and prints the alerts.
      *
+     * @param args command arguments
+     * @throws Exception on failure
      */
     public static void main(String[] args) throws Exception {
         HeartMonitorSensor monitor = new HeartMonitorSensor();

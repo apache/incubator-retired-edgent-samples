@@ -37,7 +37,7 @@ public class PersonData {
      * property.
      * @param props configuration properties
      * @return the loaded person data
-     * @throws Exception
+     * @throws Exception on failure
      */
     public static List<Person> loadPersonData(Properties props) throws Exception {
         String pathname = props.getProperty("persondata.path");

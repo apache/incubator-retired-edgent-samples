@@ -44,7 +44,6 @@ import quarks.function.Supplier;
  * SimulatedTemperatureSensor tempSensor = new SimulatedTemperatureSensor();
  * TStream<Double> temp = t.poll(tempSensor, 1, TimeUnit.SECONDS);
  * }</pre>
- * </p>
  * @see SimpleSimulatedSensor
  */
 public class SimulatedTemperatureSensor implements Supplier<Double> {
@@ -74,7 +73,7 @@ public class SimulatedTemperatureSensor implements Supplier<Double> {
      * @param tempRange maximum sensor value range
      * @param deltaFactor maximum plus/minus change on each {@code get()}.
      *              e.g., 1.0 to limit change to +/- 1.0.
-     *              Must be > 0.0
+     *              Must be &gt; 0.0
      */
     public SimulatedTemperatureSensor(double initialTemp,
             Range<Double> tempRange, double deltaFactor) {
@@ -86,12 +85,16 @@ public class SimulatedTemperatureSensor implements Supplier<Double> {
         sensor = new SimpleSimulatedSensor(initialTemp, deltaFactor, tempRange);
     }
     
-    /** Get the tempRange setting */
+    /** Get the tempRange setting
+     * @return the value
+     */
     public Range<Double> getTempRange() {
         return sensor.getRange();
     }
     
-    /** Get the deltaFactor setting */
+    /** Get the deltaFactor setting
+     * @return the value
+     */
     public double getDeltaFactor() {
         return sensor.getDeltaFactor();
     }

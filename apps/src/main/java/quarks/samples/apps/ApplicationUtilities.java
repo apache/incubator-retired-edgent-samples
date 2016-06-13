@@ -64,8 +64,10 @@ public class ApplicationUtilities {
      * <p>
      * If tracing has not been enabled in the config, the topology will not
      * be augmented to trace the stream.
-     * 
+     *
+     * @param <T> Tuple type
      * @param stream the stream to trace
+     * @param sensorId the sensor id
      * @param label some unique label
      * @return the input stream
      */
@@ -80,6 +82,7 @@ public class ApplicationUtilities {
      * If tracing has not been enabled in the config, the topology will not
      * be augmented to trace the stream.
      * 
+     * @param <T> Tuple type
      * @param stream the stream to trace
      * @param label some unique label
      * @return the input stream
@@ -212,6 +215,7 @@ public class ApplicationUtilities {
      * <p>
      * See {@link FileStreams#textFileWriter(TStream, quarks.function.Supplier, quarks.function.Supplier)}
      * 
+     * @param <T> Tuple type
      * @param stream the TStream
      * @param baseName the base log name
      * @param eventTag a tag that gets added to the log entry

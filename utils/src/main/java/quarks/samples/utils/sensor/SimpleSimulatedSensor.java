@@ -48,7 +48,6 @@ import quarks.function.Supplier;
  * TStream<Integer> intSensor = t.poll(() -> doubleSensor.get().intValue(),
  *                                          1, TimeUnit.SECONDS);
  * }</pre>
- * </p>
  */
 public class SimpleSimulatedSensor implements Supplier<Double> {
     private static final long serialVersionUID = 1L;
@@ -89,7 +88,7 @@ public class SimpleSimulatedSensor implements Supplier<Double> {
      * @param initialValue the initial value.
      * @param deltaFactor maximum plus/minus change on each {@code get()}.
      *              e.g., 1.0 to limit change to +/- 1.0.
-     *              Must be > 0.0
+     *              Must be &gt; 0.0
      */
     public SimpleSimulatedSensor(double initialValue, double deltaFactor) {
         this(initialValue, deltaFactor, null);
@@ -101,7 +100,7 @@ public class SimpleSimulatedSensor implements Supplier<Double> {
      * @param initialValue the initial value.  Must be within range.
      * @param deltaFactor maximum plus/minus change on each {@link #get()}.
      *              e.g., 1.0 to limit change to +/- 1.0.
-     *              Must be > 0.0
+     *              Must be &gt; 0.0
      * @param range maximum sensor value range. Unlimited if null.
      */
     public SimpleSimulatedSensor(double initialValue,
@@ -121,8 +120,8 @@ public class SimpleSimulatedSensor implements Supplier<Double> {
      * <p>
      * This class offers rounding as a convenience and because
      * ancestors of this implementation had such a scheme.
-     * </p><p>
-     * @param numFracDigits  if <= 0, no rounding will be performed
+     * </p>
+     * @param numFracDigits  if &lt;= 0, no rounding will be performed
      */
     public void setNumberFractionalDigits(int numFracDigits) {
         this.numFracDigits = numFracDigits;
@@ -137,17 +136,23 @@ public class SimpleSimulatedSensor implements Supplier<Double> {
         }
     }
     
-    /** Get the number of fractional digits setting */
+    /** Get the number of fractional digits setting
+     * @return the value
+     */
     public int getNumberFractionalDigits() {
         return numFracDigits;
     }
     
-    /** Get the range setting */
+    /** Get the range setting
+     * @return the value
+     */
     public Range<Double> getRange() {
         return range;
     }
     
-    /** Get the deltaFactor setting */
+    /** Get the deltaFactor setting
+     * @return the value
+     */
     public double getDeltaFactor() {
         return deltaFactor;
     }

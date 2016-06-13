@@ -53,7 +53,7 @@ public class IotfFullScenario {
      * authentication information.
      * 
      * @param args Must contain the path to the device configuration file.
-     * 
+     * @throws Exception on failure
      * @see IotfDevice#IotfDevice(quarks.topology.Topology, File)
      */
     public static void main(String[] args) throws Exception {

@@ -47,6 +47,7 @@ public class SubscriberApp {
     
     /**
      * Create a topology for the subscriber application.
+     * @return the Topology
      */
     public Topology buildAppTopology() {
         Topology t = tp.newTopology("mqttClientSubscriber");

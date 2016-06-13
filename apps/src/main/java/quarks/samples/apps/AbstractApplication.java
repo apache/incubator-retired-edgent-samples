@@ -65,7 +65,7 @@ public abstract class AbstractApplication {
     
     /**
      * Construct and run the application's topology.
-     * @throws Exception
+     * @throws Exception on failure
      */
     protected void run() throws Exception {
 // TODO need to setup logging to squelch stderr output from the runtime/connectors, 
@@ -120,6 +120,7 @@ public abstract class AbstractApplication {
     
     /**
      * Build the application's topology.
+     * @param t Topology to add to
      */
     abstract protected void buildTopology(Topology t);
     

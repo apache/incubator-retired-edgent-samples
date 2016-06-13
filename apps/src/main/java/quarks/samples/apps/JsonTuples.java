@@ -55,6 +55,7 @@ public class JsonTuples {
     
     /**
      * Create a JsonObject wrapping a raw {@code Pair<Long msec,T reading>>} sample.
+     * @param <T> Tuple type
      * @param sample the raw sample
      * @param id the sensor's Id
      * @return the wrapped sample
@@ -86,7 +87,8 @@ public class JsonTuples {
     /**
      * Create a stream of JsonObject wrapping a stream of 
      * raw {@code Pair<Long msec,T reading>>} samples.
-     * 
+     *
+     * @param <T> Tuple type
      * @param stream the raw input stream
      * @param id the sensor's Id
      * @return the wrapped stream

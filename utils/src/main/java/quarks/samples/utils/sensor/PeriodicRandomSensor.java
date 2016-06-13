@@ -168,6 +168,7 @@ public class PeriodicRandomSensor {
      * Create a periodic sensor stream with readings from {@link Random#nextBytes(byte[])}.
      * @param t the topology to add the sensor stream to
      * @param periodMsec how frequently to generate a reading
+     * @param nBytes the number of bytes in each reading tuple
      * @return the sensor value stream
      */
     public TStream<Pair<Long,byte[]>> newBytes(Topology t, long periodMsec, int nBytes) {

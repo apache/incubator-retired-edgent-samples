@@ -34,7 +34,6 @@ import quarks.runtime.jobregistry.JobEvents;
 import quarks.runtime.jobregistry.JobRegistry;
 import quarks.topology.TStream;
 import quarks.topology.Topology;
-import quarks.topology.plumbing.PlumbingStreams;
 
 /**
  * Demonstrates job monitoring using the {@link JobRegistryService} service.

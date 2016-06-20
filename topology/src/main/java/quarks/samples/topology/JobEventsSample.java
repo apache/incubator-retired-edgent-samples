@@ -114,9 +114,8 @@ public class JobEventsSample {
         TStream<JsonObject> jobEvents = JobEvents.source(
                 topology, 
                 (evType, job) -> { return JobEventsSample.wrap(evType, job); });
-        
-        TStream<JsonObject> isolated = PlumbingStreams.isolate(jobEvents, true);
-        isolated.sink(tuple -> {
+
+        jobEvents.sink(tuple -> {
                 System.err.println(tuple.toString());
             });
 

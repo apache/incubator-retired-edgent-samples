@@ -20,11 +20,11 @@ under the License.
 package quarks.samples.connectors.iotf;
 
 import java.io.File;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import com.google.gson.JsonObject;
 
+import quarks.connectors.iot.HeartBeat;
 import quarks.connectors.iot.IotDevice;
 import quarks.connectors.iot.QoS;
 import quarks.connectors.iotf.IotfDevice;
@@ -119,20 +119,8 @@ public class IotfSensors {
      * @param print true to print generated heartbeat tuples to System.out.
      */
     public static void heartBeat(IotDevice device, boolean print) {
-        // In addition create a heart beat event to
-        // ensure there is some immediate output and
-        // the connection to IoTF happens as soon as possible.
-        TStream<Date> hb = device.topology().poll(() -> new Date(), 1, TimeUnit.MINUTES);
-        // Convert to JSON
-        TStream<JsonObject> hbj = hb.map(d -> {
-            JsonObject j = new  JsonObject();
-            j.addProperty("when", d.toString());
-            j.addProperty("hearbeat", d.getTime());
-            return j;
-        });
-        if (print)
-            hbj.print();
-        device.events(hbj, "heartbeat", QoS.FIRE_AND_FORGET);
+      HeartBeat.addHeartBeat(device, 1, TimeUnit.MINUTES,
+          "heartbeat", stream -> { if (print) stream.print(); });
     }
     
 

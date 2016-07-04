@@ -136,6 +136,8 @@ public class IotfRangeSensor {
      * @param print
      *            True if the data submitted as events should also be printed to
      *            standard out.
+     * @param simulated
+     *            boolean flag
      */
     public static void rangeSensor(IotDevice device, boolean simulated, boolean print) {
 
@@ -197,7 +199,10 @@ public class IotfRangeSensor {
      * Note to receive commands a analytic application must exist that generates
      * them through IBM Watson IoT Platform.
      * </P>
-     * 
+     *
+     * @param device IoTF device
+     * @return JSON object includes tsms(timestamp) and payload.msg(status)
+     *
      * @see IotDevice#commands(String...)
      */
     public static TStream<String> displayMessages(IotDevice device) {

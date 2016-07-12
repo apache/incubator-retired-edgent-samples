@@ -119,8 +119,10 @@ public class IotfSensors {
      * @param print true to print generated heartbeat tuples to System.out.
      */
     public static void heartBeat(IotDevice device, boolean print) {
-      HeartBeat.addHeartBeat(device, 1, TimeUnit.MINUTES,
-          "heartbeat", stream -> { if (print) stream.print(); });
+      TStream<JsonObject> hbs = 
+          HeartBeat.addHeartBeat(device, 1, TimeUnit.MINUTES, "heartbeat");
+      if (print)
+        hbs.print();
     }
     
 

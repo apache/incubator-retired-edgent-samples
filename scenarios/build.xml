@@ -15,7 +15,7 @@
  under the License.
  -->
 
-<project name="quarks.samples.scenarios" default="all" xmlns:jacoco="antlib:org.jacoco.ant">
+<project name="edgent.samples.scenarios" default="all" xmlns:jacoco="antlib:org.jacoco.ant">
     <description>
         Build scenario applications.
     </description>
@@ -29,10 +29,10 @@
   <import file="../../common-build.xml"/>
 
   <path id="compile.classpath">
-    <path refid="quarks.samples.classpath"/>
-    <pathelement location="${quarks.samples}/lib/quarks.samples.connectors.jar"/>
-    <pathelement location="${quarks.lib}/quarks.providers.iot.jar"/>
-    <pathelement location="${quarks.connectors}/iotf/lib/quarks.connectors.iotf.jar"/>
+    <path refid="edgent.samples.classpath"/>
+    <pathelement location="${edgent.samples}/lib/edgent.samples.connectors.jar"/>
+    <pathelement location="${edgent.lib}/edgent.providers.iot.jar"/>
+    <pathelement location="${edgent.connectors}/iotf/lib/edgent.connectors.iotf.jar"/>
     <pathelement location="${env.PI4J_LIB}/pi4j-core.jar"/>
   </path>
 

@@ -14,7 +14,7 @@
  specific language governing permissions and limitations
  under the License.
  -->
-<project name="quarks.samples.console" default="all" xmlns:jacoco="antlib:org.jacoco.ant">
+<project name="edgent.samples.console" default="all" xmlns:jacoco="antlib:org.jacoco.ant">
 	<description>
         Build samples demonstrating Console functionality.
     </description>
@@ -23,12 +23,12 @@
 	<import file="../../common-build.xml" />
 
 	<path id="compile.classpath">
-		<path refid="quarks.samples.classpath"/>
-        <pathelement location="${quarks.console}/server/lib/quarks.console.server.jar" />
-		<pathelement location="${quarks.lib}/quarks.topology.jar" />
-		<pathelement location="${quarks.lib}/quarks.providers.development.jar" />
-		<pathelement location="${quarks.lib}/quarks.providers.direct.jar" />
-        <path refid="quarks.ext.classpath" />
+		<path refid="edgent.samples.classpath"/>
+        <pathelement location="${edgent.console}/server/lib/edgent.console.server.jar" />
+		<pathelement location="${edgent.lib}/edgent.topology.jar" />
+		<pathelement location="${edgent.lib}/edgent.providers.development.jar" />
+		<pathelement location="${edgent.lib}/edgent.providers.direct.jar" />
+        <path refid="edgent.ext.classpath" />
 	</path>
 
 	<path id="test.compile.classpath">

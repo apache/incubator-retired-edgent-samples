@@ -14,7 +14,7 @@
  specific language governing permissions and limitations
  under the License.
  -->
-<project name="quarks.samples.connectors" default="all" xmlns:jacoco="antlib:org.jacoco.ant">
+<project name="edgent.samples.connectors" default="all" xmlns:jacoco="antlib:org.jacoco.ant">
     <description>
         Build samples demonstrating connector functionality.
     </description>
@@ -23,16 +23,16 @@
   <import file="../../common-build.xml"/>
 
   <path id="compile.classpath">
-    <path refid="quarks.samples.classpath"/>
-    <pathelement location="${quarks.connectors}/mqtt/lib/quarks.connectors.mqtt.jar"/>
-    <pathelement location="${quarks.connectors}/kafka/lib/quarks.connectors.kafka.jar"/>
-    <pathelement location="${quarks.connectors}/file/lib/quarks.connectors.file.jar"/>
-    <pathelement location="${quarks.connectors}/iotf/lib/quarks.connectors.iotf.jar"/>
-    <pathelement location="${quarks.connectors}/jdbc/lib/quarks.connectors.jdbc.jar"/>
-    <pathelement location="${quarks.connectors}/serial/lib/quarks.connectors.serial.jar"/>
-    <pathelement location="${lib}/quarks.samples.topology.jar"/>
-    <pathelement location="${lib}/quarks.samples.utils.jar"/>
-    <path refid="quarks.ext.classpath" />
+    <path refid="edgent.samples.classpath"/>
+    <pathelement location="${edgent.connectors}/mqtt/lib/edgent.connectors.mqtt.jar"/>
+    <pathelement location="${edgent.connectors}/kafka/lib/edgent.connectors.kafka.jar"/>
+    <pathelement location="${edgent.connectors}/file/lib/edgent.connectors.file.jar"/>
+    <pathelement location="${edgent.connectors}/iotf/lib/edgent.connectors.iotf.jar"/>
+    <pathelement location="${edgent.connectors}/jdbc/lib/edgent.connectors.jdbc.jar"/>
+    <pathelement location="${edgent.connectors}/serial/lib/edgent.connectors.serial.jar"/>
+    <pathelement location="${lib}/edgent.samples.topology.jar"/>
+    <pathelement location="${lib}/edgent.samples.utils.jar"/>
+    <path refid="edgent.ext.classpath" />
   </path>
 
   <path id="test.compile.classpath">

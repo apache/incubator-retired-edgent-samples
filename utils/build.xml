@@ -14,7 +14,7 @@
  specific language governing permissions and limitations
  under the License.
  -->
-<project name="quarks.samples.utils" default="all" xmlns:jacoco="antlib:org.jacoco.ant">
+<project name="edgent.samples.utils" default="all" xmlns:jacoco="antlib:org.jacoco.ant">
     <description>
         Build samples demonstrating add-on functionality.
     </description>
@@ -23,11 +23,11 @@
   <import file="../../common-build.xml"/>
 
   <path id="compile.classpath">
-    <path refid="quarks.samples.classpath"/>
-    <pathelement location="${quarks.utils}/metrics/lib/quarks.utils.metrics.jar"/>
-    <pathelement location="${quarks.analytics}/math3/lib/quarks.analytics.math3.jar"/>
-    <pathelement location="${quarks.analytics}/sensors/lib/quarks.analytics.sensors.jar"/>
-    <path refid="quarks.ext.classpath"/>
+    <path refid="edgent.samples.classpath"/>
+    <pathelement location="${edgent.utils}/metrics/lib/edgent.utils.metrics.jar"/>
+    <pathelement location="${edgent.analytics}/math3/lib/edgent.analytics.math3.jar"/>
+    <pathelement location="${edgent.analytics}/sensors/lib/edgent.analytics.sensors.jar"/>
+    <path refid="edgent.ext.classpath"/>
   </path>
 
   <path id="test.compile.classpath">

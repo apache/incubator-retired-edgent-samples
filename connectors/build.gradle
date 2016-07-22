@@ -17,7 +17,7 @@ dependencies {
   compile project(':connectors:mqtt')
   compile project(':connectors:kafka')
   compile project(':connectors:file')
-  compile project(':connectors:iotf')
+  compile project(':connectors:iotp')
   compile project(':connectors:jdbc')
   compile project(':connectors:serial')
   compile project(':samples:topology')

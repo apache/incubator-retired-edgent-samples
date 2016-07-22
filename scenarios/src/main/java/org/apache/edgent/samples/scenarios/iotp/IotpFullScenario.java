@@ -16,14 +16,14 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 */
-package org.apache.edgent.samples.scenarios.iotf;
+package org.apache.edgent.samples.scenarios.iotp;
 
 
 import java.io.File;
 
-import org.apache.edgent.connectors.iotf.IotfDevice;
+import org.apache.edgent.connectors.iotp.IotpDevice;
 import org.apache.edgent.providers.iot.IotProvider;
-import org.apache.edgent.samples.connectors.iotf.IotfSensors;
+import org.apache.edgent.samples.connectors.iotp.IotpSensors;
 
 /**
  * Sample IotProvider scenario using IBM Watson IoT Platform.
@@ -33,7 +33,7 @@ import org.apache.edgent.samples.connectors.iotf.IotfSensors;
  * application sending device commands through
  * IBM Watson IoT Platform.
  * <P>
- * This is equivalent to the {@link IotfSensors} application
+ * This is equivalent to the {@link IotpSensors} application
  * but executing as three separate applications using
  * {@link IotProvider} rather than the lower level
  * {@link org.apache.edgent.providers.direct.DirectProvider}.
@@ -43,10 +43,10 @@ import org.apache.edgent.samples.connectors.iotf.IotfSensors;
  * @see org.apache.edgent.topology.mbeans.ApplicationServiceMXBean
  * @see org.apache.edgent.topology.mbeans
  */
-public class IotfFullScenario {
+public class IotpFullScenario {
     
     /**
-     * Run the IotfFullScenario application.
+     * Run the IotpFullScenario application.
      * 
      * Takes a single argument that is the path to the
      * device configuration file containing the connection
@@ -54,16 +54,16 @@ public class IotfFullScenario {
      * 
      * @param args Must contain the path to the device configuration file.
      * @throws Exception on failure
-     * @see IotfDevice#IotfDevice(org.apache.edgent.topology.Topology, File)
+     * @see IotpDevice#IotpDevice(org.apache.edgent.topology.Topology, File)
      */
     public static void main(String[] args) throws Exception {
         String deviceCfg = args[0];
         
         // Create an IotProvider that will use
-        // an IotfDevice as the connectivity to
+        // an IotpDevice as the connectivity to
         // the IBM Watson IoT Platform message hub.
         IotProvider provider = new IotProvider(
-                topology -> new IotfDevice(topology, new File(deviceCfg)));
+                topology -> new IotpDevice(topology, new File(deviceCfg)));
               
         // Register three applications
         registerHeartbeat(provider);       
@@ -77,16 +77,16 @@ public class IotfFullScenario {
     
     public static void registerHeartbeat(IotProvider provider) {
         provider.registerTopology("Heartbeat",
-                (iotDevice,config) -> IotfSensors.heartBeat(iotDevice, true));
+                (iotDevice,config) -> IotpSensors.heartBeat(iotDevice, true));
     }
     
     public static void registerSensors(IotProvider provider) {
         provider.registerTopology("Sensors",
-                (iotDevice,config) -> IotfSensors.simulatedSensors(iotDevice, true));
+                (iotDevice,config) -> IotpSensors.simulatedSensors(iotDevice, true));
     }
     public static void registerDisplay(IotProvider provider) {
         provider.registerTopology("Display",
-                (iotDevice,config) -> IotfSensors.displayMessages(iotDevice, true));
+                (iotDevice,config) -> IotpSensors.displayMessages(iotDevice, true));
     }
 
 }

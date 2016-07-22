@@ -16,14 +16,14 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 */
-package org.apache.edgent.samples.connectors.iotf;
+package org.apache.edgent.samples.connectors.iotp;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.edgent.connectors.iot.IotDevice;
 import org.apache.edgent.connectors.iot.QoS;
-import org.apache.edgent.connectors.iotf.IotfDevice;
+import org.apache.edgent.connectors.iotp.IotpDevice;
 import org.apache.edgent.providers.direct.DirectProvider;
 import org.apache.edgent.topology.TStream;
 import org.apache.edgent.topology.Topology;
@@ -44,18 +44,18 @@ import com.google.gson.JsonObject;
  * A URL is also printed that allows viewing of the data
  * as it received by the Quickstart service.
  */
-public class IotfQuickstart {
+public class IotpQuickstart {
 
     public static void main(String[] args) {
 
         DirectProvider tp = new DirectProvider();
-        Topology topology = tp.newTopology("IotfQuickstart");
+        Topology topology = tp.newTopology("IotpQuickstart");
         
         // Declare a connection to IoTF Quickstart service
         String deviceId = "qs" + Long.toHexString(new Random().nextLong());
-        IotDevice device = IotfDevice.quickstart(topology, deviceId);
+        IotDevice device = IotpDevice.quickstart(topology, deviceId);
         
-        System.out.println("Quickstart device type:" + IotfDevice.QUICKSTART_DEVICE_TYPE);
+        System.out.println("Quickstart device type:" + IotpDevice.QUICKSTART_DEVICE_TYPE);
         System.out.println("Quickstart device id  :" + deviceId);
         System.out.println("https://quickstart.internetofthings.ibmcloud.com/#/device/"
              + deviceId);

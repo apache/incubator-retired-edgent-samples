@@ -27,7 +27,7 @@
     <pathelement location="${edgent.connectors}/mqtt/lib/edgent.connectors.mqtt.jar"/>
     <pathelement location="${edgent.connectors}/kafka/lib/edgent.connectors.kafka.jar"/>
     <pathelement location="${edgent.connectors}/file/lib/edgent.connectors.file.jar"/>
-    <pathelement location="${edgent.connectors}/iotf/lib/edgent.connectors.iotf.jar"/>
+    <pathelement location="${edgent.connectors}/iotp/lib/edgent.connectors.iotp.jar"/>
     <pathelement location="${edgent.connectors}/jdbc/lib/edgent.connectors.jdbc.jar"/>
     <pathelement location="${edgent.connectors}/serial/lib/edgent.connectors.serial.jar"/>
     <pathelement location="${lib}/edgent.samples.topology.jar"/>

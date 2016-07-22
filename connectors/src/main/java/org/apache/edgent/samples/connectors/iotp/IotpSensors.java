@@ -17,7 +17,7 @@ specific language governing permissions and limitations
 under the License.
 */
 
-package org.apache.edgent.samples.connectors.iotf;
+package org.apache.edgent.samples.connectors.iotp;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.edgent.connectors.iot.HeartBeat;
 import org.apache.edgent.connectors.iot.IotDevice;
 import org.apache.edgent.connectors.iot.QoS;
-import org.apache.edgent.connectors.iotf.IotfDevice;
+import org.apache.edgent.connectors.iotp.IotpDevice;
 import org.apache.edgent.providers.direct.DirectProvider;
 import org.apache.edgent.providers.direct.DirectTopology;
 import org.apache.edgent.samples.topology.SensorsAggregates;
@@ -52,10 +52,10 @@ import com.google.gson.JsonObject;
  * that sends commands with the identifier {@code display}.
  * </P>
  */
-public class IotfSensors {
+public class IotpSensors {
 
     /**
-     * Run the IotfSensors application.
+     * Run the IotpSensors application.
      * 
      * Takes a single argument that is the path to the
      * device configuration file containing the connection
@@ -63,17 +63,17 @@ public class IotfSensors {
      * 
      * @param args Must contain the path to the device configuration file.
      * 
-     * @see IotfDevice#IotfDevice(org.apache.edgent.topology.Topology, File)
+     * @see IotpDevice#IotpDevice(org.apache.edgent.topology.Topology, File)
      */
     public static void main(String[] args) {
         
         String deviceCfg = args[0];
 
         DirectProvider tp = new DirectProvider();
-        DirectTopology topology = tp.newTopology("IotfSensors");
+        DirectTopology topology = tp.newTopology("IotpSensors");
 
         // Declare a connection to IoTF
-        IotDevice device = new IotfDevice(topology, new File(deviceCfg));
+        IotDevice device = new IotpDevice(topology, new File(deviceCfg));
 
         // Simulated sensors for this device.
         simulatedSensors(device, true);
@@ -127,7 +127,7 @@ public class IotfSensors {
     
 
     /**
-     * Subscribe to IoTF device commands with identifier {@code display}.
+     * Subscribe to IoTP device commands with identifier {@code display}.
      * Subscribing to device commands returns a stream of JSON objects that
      * include a timestamp ({@code tsms}), command identifier ({@code command})
      * and payload ({@code payload}). Payload is the application specific

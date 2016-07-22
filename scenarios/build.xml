@@ -32,7 +32,7 @@
     <path refid="edgent.samples.classpath"/>
     <pathelement location="${edgent.samples}/lib/edgent.samples.connectors.jar"/>
     <pathelement location="${edgent.lib}/edgent.providers.iot.jar"/>
-    <pathelement location="${edgent.connectors}/iotf/lib/edgent.connectors.iotf.jar"/>
+    <pathelement location="${edgent.connectors}/iotp/lib/edgent.connectors.iotp.jar"/>
     <pathelement location="${env.PI4J_LIB}/pi4j-core.jar"/>
   </path>
 

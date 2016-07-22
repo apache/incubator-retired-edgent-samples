@@ -16,7 +16,7 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 */
-package org.apache.edgent.samples.scenarios.iotf.range.sensor;
+package org.apache.edgent.samples.scenarios.iotp.range.sensor;
 
 import static org.apache.edgent.analytics.math3.stat.Statistic.MAX;
 import static org.apache.edgent.analytics.math3.stat.Statistic.MEAN;
@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.edgent.analytics.math3.json.JsonAnalytics;
 import org.apache.edgent.connectors.iot.IotDevice;
 import org.apache.edgent.connectors.iot.QoS;
-import org.apache.edgent.connectors.iotf.IotfDevice;
+import org.apache.edgent.connectors.iotp.IotpDevice;
 import org.apache.edgent.function.Supplier;
 import org.apache.edgent.providers.direct.DirectProvider;
 import org.apache.edgent.providers.direct.DirectTopology;
@@ -43,7 +43,7 @@ import com.google.gson.JsonObject;
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.RaspiPin;
 
-public class IotfRangeSensor {
+public class IotpRangeSensor {
     private static final Pin echoPin = RaspiPin.GPIO_05; // PI4J custom
                                                          // numbering (pin 18 on
                                                          // RPi2)
@@ -58,7 +58,7 @@ public class IotfRangeSensor {
         if (args.length != 3) {
             System.out.println("Proper Usage is:\n   " + "   java program device.cfg sensorIsSimulated LEDIsSimulated\n"
                     + "Example: \n"
-                    + "   java -cp $EDGENT/target/java8/samples/lib/'*':$PI4J_LIB/'*':bin/ com.ibm.streamsx.iotf.range.IotfRangeSensor device.cfg false true");
+                    + "   java -cp $EDGENT/target/java8/samples/lib/'*':$PI4J_LIB/'*':bin/ com.ibm.streamsx.iotp.range.IotpRangeSensor device.cfg false true");
             System.exit(0);
         }
 
@@ -67,7 +67,7 @@ public class IotfRangeSensor {
         Boolean simulatedLED = Boolean.parseBoolean(args[2]);
 
         DirectProvider tp = new DirectProvider();
-        DirectTopology topology = tp.newTopology("IotfRangeSensor");
+        DirectTopology topology = tp.newTopology("IotpRangeSensor");
 
         IotDevice device = getIotDevice(deviceCfg, topology);
 
@@ -115,14 +115,14 @@ public class IotfRangeSensor {
         if (deviceCfg.equalsIgnoreCase("quickstart")) {
             // Declare a connection to IoTF Quickstart service
             String deviceId = "qs" + Long.toHexString(new Random().nextLong());
-            device = IotfDevice.quickstart(topology, deviceId);
+            device = IotpDevice.quickstart(topology, deviceId);
 
-            System.out.println("Quickstart device type:" + IotfDevice.QUICKSTART_DEVICE_TYPE);
+            System.out.println("Quickstart device type:" + IotpDevice.QUICKSTART_DEVICE_TYPE);
             System.out.println("Quickstart device id  :" + deviceId);
             System.out.println("https://quickstart.internetofthings.ibmcloud.com/#/device/" + deviceId);
         } else {
             // Declare a connection to IoTF
-            device = new IotfDevice(topology, new File(deviceCfg));
+            device = new IotpDevice(topology, new File(deviceCfg));
         }
 
         return device;

@@ -20,5 +20,5 @@ under the License.
 /**
  * Samples showing device events and commands with IBM Watson IoT Platform.
  */
-package org.apache.edgent.samples.connectors.iotf;
+package org.apache.edgent.samples.connectors.iotp;
 

@@ -20,5 +20,7 @@ dependencies {
   compile project(':analytics:math3')
   compile project(':analytics:sensors')
   compile project(':samples:utils')
-  compile ext_classpath
+  compile core_ext_dependencies
+  
+  runtime samples_ext_dependencies
 }

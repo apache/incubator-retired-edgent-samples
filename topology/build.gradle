@@ -17,5 +17,7 @@ dependencies {
   compile project(':analytics:math3')
   compile project(':runtime:jobregistry')
   compile project(':samples:utils')
-  compile ext_classpath
+  compile core_ext_dependencies
+  
+  runtime samples_ext_dependencies
 }

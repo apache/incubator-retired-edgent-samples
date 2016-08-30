@@ -15,5 +15,7 @@ dependencies {
   compile project(':providers:development')
   compile project(':providers:direct')
   compile project(':console:server')
-  compile ext_classpath
+  compile core_ext_dependencies
+  
+  runtime samples_ext_dependencies
 }

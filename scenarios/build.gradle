@@ -18,5 +18,7 @@ dependencies {
   compile project(':providers:iot')
   compile project(':connectors:iotp')
   compile 'com.pi4j:pi4j-core:1.0'
-  compile ext_classpath
+  compile core_ext_dependencies
+  
+  runtime samples_ext_dependencies
 }

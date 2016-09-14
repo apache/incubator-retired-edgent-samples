@@ -12,13 +12,14 @@
  * limitations under the License.
  */
 dependencies {
-  compile project(':providers:development')
-  compile project(':providers:direct')
-  compile project(':samples:connectors')
-  compile project(':providers:iot')
-  compile project(':connectors:iotp')
-  compile 'com.pi4j:pi4j-core:1.0'
-  compile core_ext_dependencies
-  
-  runtime samples_ext_dependencies
+  // N.B. common dependencies are set in root build.gradle
+
+  addTargetDirProjectJarDependency 'compile', ':analytics:math3'
+  addTargetDirProjectJarDependency 'compile', ':samples:connectors'
+  addTargetDirProjectJarDependency 'compile', ':providers:iot'
+  addTargetDirProjectJarDependency 'compile', ':connectors:iot'
+  addTargetDirProjectJarDependency 'compile', ':connectors:iotp'
+  addProjectExtDependency 'compile', 'com.pi4j:pi4j-core:1.0'
+
+  // N.B. root project adds test common dependencies
 }

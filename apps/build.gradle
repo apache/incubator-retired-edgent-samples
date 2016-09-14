@@ -12,15 +12,14 @@
  * limitations under the License.
  */
 dependencies {
-  compile project(':providers:development')
-  compile project(':providers:direct')
-  compile project(':connectors:mqtt')
-  compile project(':connectors:file')
-  compile project(':connectors:serial')
-  compile project(':analytics:math3')
-  compile project(':analytics:sensors')
-  compile project(':samples:utils')
-  compile core_ext_dependencies
-  
-  runtime samples_ext_dependencies
+  // N.B. common dependencies are set in root build.gradle
+
+  addTargetDirProjectJarDependency 'compile', ':connectors:mqtt'
+  addTargetDirProjectJarDependency 'compile', ':connectors:file'
+  addTargetDirProjectJarDependency 'compile', ':connectors:serial'
+  addTargetDirProjectJarDependency 'compile', ':analytics:math3'
+  addTargetDirProjectJarDependency 'compile', ':analytics:sensors'
+  addTargetDirProjectJarDependency 'compile', ':samples:utils'
+
+  // N.B. root project adds test common dependencies
 }

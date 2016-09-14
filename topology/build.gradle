@@ -11,13 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 dependencies {
-  compile project(':providers:development')
-  compile project(':providers:direct')
-  compile project(':analytics:math3')
-  compile project(':runtime:jobregistry')
-  compile project(':samples:utils')
-  compile core_ext_dependencies
-  
-  runtime samples_ext_dependencies
+  // N.B. common dependencies are set in root build.gradle
+
+  addTargetDirProjectJarDependency 'compile', ':analytics:math3'
+  addTargetDirProjectJarDependency 'compile', ':runtime:jobregistry'
+  addTargetDirProjectJarDependency 'compile', ':samples:utils'
+
+  // N.B. root project adds test common dependencies
 }

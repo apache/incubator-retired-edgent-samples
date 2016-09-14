@@ -12,12 +12,11 @@
  * limitations under the License.
  */
 dependencies {
-  compile project(':providers:development')
-  compile project(':providers:direct')
-  compile project(':utils:metrics')
-  compile project(':analytics:math3')
-  compile project(':analytics:sensors')
-  compile core_ext_dependencies
-  
-  runtime samples_ext_dependencies
+  // N.B. common dependencies are set in root build.gradle
+
+  addTargetDirProjectJarDependency 'compile', ':utils:metrics'
+  addTargetDirProjectJarDependency 'compile', ':analytics:math3'
+  addTargetDirProjectJarDependency 'compile', ':analytics:sensors'
+
+  // N.B. root project adds test common dependencies
 }

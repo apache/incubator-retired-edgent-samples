@@ -12,17 +12,17 @@
  * limitations under the License.
  */
 dependencies {
-  compile project(':providers:development')
-  compile project(':providers:direct')
-  compile project(':connectors:mqtt')
-  compile project(':connectors:kafka')
-  compile project(':connectors:file')
-  compile project(':connectors:iotp')
-  compile project(':connectors:jdbc')
-  compile project(':connectors:serial')
-  compile project(':samples:topology')
-  compile project(':samples:utils')
-  compile core_ext_dependencies
-  
-  runtime samples_ext_dependencies
+  // N.B. common dependencies are set in root build.gradle
+
+  addTargetDirProjectJarDependency 'compile', ':analytics:math3'
+  addTargetDirProjectJarDependency 'compile', ':connectors:mqtt'
+  addTargetDirProjectJarDependency 'compile', ':connectors:kafka'
+  addTargetDirProjectJarDependency 'compile', ':connectors:file'
+  addTargetDirProjectJarDependency 'compile', ':connectors:iotp'
+  addTargetDirProjectJarDependency 'compile', ':connectors:jdbc'
+  addTargetDirProjectJarDependency 'compile', ':connectors:serial'
+  addTargetDirProjectJarDependency 'compile', ':samples:topology'
+  addTargetDirProjectJarDependency 'compile', ':samples:utils'
+
+  // N.B. root project adds test common dependencies
 }

@@ -12,10 +12,9 @@
  * limitations under the License.
  */
 dependencies {
-  compile project(':providers:development')
-  compile project(':providers:direct')
-  compile project(':console:server')
-  compile core_ext_dependencies
-  
-  runtime samples_ext_dependencies
+  // N.B. common dependencies are set in root build.gradle
+
+  addTargetDirProjectJarDependency 'compile', ':console:server'
+
+  // N.B. root project adds test common dependencies
 }

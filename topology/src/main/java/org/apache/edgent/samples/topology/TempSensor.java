@@ -27,6 +27,7 @@ import org.apache.edgent.function.Supplier;
  * Every time get() is called, TempSensor generates a temperature reading.
  */
 public class TempSensor implements Supplier<Double> {
+    private static final long serialVersionUID = 1L;
     double currentTemp = 65.0;
     Random rand;
 

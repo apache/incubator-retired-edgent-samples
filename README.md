@@ -96,7 +96,7 @@ which is not supported on the Android platform.
 
 Build the samples
 ```sh
-./mvnw clean package  # -Pplatform-java7 as needed
+./mvnw clean package  # -Pplatform-java7 and/or -Dedgent.runtime.version=<the-version> as needed
 ```
 
 A standard jar and uber jar are created for each sample category

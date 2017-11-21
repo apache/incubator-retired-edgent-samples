@@ -17,6 +17,13 @@
 
 # Quickstart
 
+If you haven't already done so, download the samples from github:
+```sh
+git clone https://github.com/apache/incubator-edgent-samples
+cd incubator-edgent-samples
+git checkout develop
+```
+
 You must have Java 8 installed on your system. Maven will be automatically
 downloaded and installed by the maven wrapper `mvnw`.
 

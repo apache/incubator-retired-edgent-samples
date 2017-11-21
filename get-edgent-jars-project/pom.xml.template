@@ -22,11 +22,6 @@
   <modelVersion>4.0.0</modelVersion>
 
   <!-- standalone project -->
-  <!--parent>
-    <groupId>org.apache.edgent</groupId>
-    <artifactId>edgent-parent</artifactId>
-    <version>1.2.0</version>
-  </parent-->
 
   <groupId>org.apache.edgent</groupId>
   <artifactId>get-edgent-jars-project</artifactId>

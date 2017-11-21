@@ -39,11 +39,8 @@
     <edgent.platform>java8</edgent.platform> <!-- tweaked by -Pplatform-* -->    
     <edgent.groupId.platform/> <!-- tweaked by -Pplatform-* -->    
     <edgent.base.groupId>org.apache.edgent${edgent.groupId.platform}</edgent.base.groupId>
-    <!--  at least for now, the samples version is lockstep with the core
-          so default to using the same core as the this project.
-          get-edgent-jars.sh overrides via -Dedgent.runtime.version=...
-    -->
-    <edgent.runtime.version>${project.version}</edgent.runtime.version>
+    <!-- get-edgent-jars.sh overrides via -Dedgent.runtime.version=... -->
+    <edgent.runtime.version>1.2.0</edgent.runtime.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 

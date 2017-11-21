@@ -22,7 +22,7 @@ Edgent SDK/runtime jars and package your application
 artifacts for deploying to an edge device or gateway for execution.
 
 The Edgent SDK/runtime jars are published to the 
-[ASF Nexus Repository](https://repository.apache.org/content/repositories/releases/)
+[ASF Nexus Releases Repository](https://repository.apache.org/content/repositories/releases/)
 and the Maven Central Repository.
 Alternatively, you can build the Edgent SDK yourself from a source release
 and the resulting jars will be added to your local maven repository.
@@ -37,7 +37,9 @@ The maven artifact groupIds for the Edgent jars are:
 Note, the Java package names for Edgent components do not incorporate
 the platform kind; the package names are the same regardless of the platform.
 
-See `JAVA_SUPPORT.md` for more information on artifact coordinates, etc.
+See the release's `JAVA_SUPPORT` information in [downloads](https://http://edgent.incubator.apache.org/docs/downloads)
+for more information on artifact coordinates, etc.
+
 
 ## Writing Your Application
 
@@ -89,6 +91,11 @@ the deployment of application and Edgent jars to edge devices is left to
 others (as an example, the IBM Watson IoT Platform has device APIs to
 support "firmware" download/update).
 
+To deploy an Edgent application to a device like a Raspberry Pi, 
+you could just FTP the application to the device and modify the
+device to start the application upon startup or on command.
+Also see the `cron` folder in the Edgent samples.
+
 To run your Edgent application on an edge device, your application
 jar(s) need to be on the device.  Additionally, the application's 
 dependent Edgent jars (and their transitive dependencies) need to
@@ -98,7 +105,7 @@ maven central.
 
 Here are three options for dealing with this.
 
-### Create an uber-jar for your application
+### Option 1: Create an uber-jar for your application
 
 The uber jar is a standalone entity containing
 everything that's needed to run your application.
@@ -112,7 +119,10 @@ the Edgent samples poms contain configuration information
 that generates an uber jar in addition to the standard
 application jar.  Eclipse can also export an uber jar.
 
-### Separately manage the application and Edgent jars
+You run your application like:
+    `java -cp <path-to-uber-jar> <full-classname-of-main-class>`
+
+### Option 2: Separately manage the application and Edgent jars
 
 Copy the application's jars to the device.
 Get a copy of the Edgent jars and their dependencies
@@ -127,7 +137,7 @@ are only released to maven central.
 See [samples/get-edgent-jars-project](get-edgent-jars-project/README.md)
 for a tool to get a copy of the Edgent jars.
 
-### Create an application package bundle
+### Option 3: Create an application package bundle
 
 The bundle is a standalone entity containing
 everything that's needed to run your application.
@@ -136,8 +146,8 @@ The bundle is copied to the device and unpacked.
 A run script forms the appropriate `CLASSPATH`
 to the package's jars and starts the application.
 
-The supplied `package-app.sh` script creates an
-application bundle.
+The `package-app.sh` script included with the
+Edgent samples creates an application bundle.
 
 The application bundle contains the application's jar,
 the application's dependent Edgent jars (as specified in

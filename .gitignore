@@ -6,6 +6,7 @@
 
 # Exclude the maven-wrapper.jar
 .mvn/wrapper/maven-wrapper.jar
+template/.mvn/wrapper/maven-wrapper.jar
 
 # More generated artifacts
 target/

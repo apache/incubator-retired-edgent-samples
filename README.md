@@ -65,9 +65,9 @@ Getting Started https://edgent.apache.org/docs/edgent-getting-started
 
 # Setup
 
-Once you have downloaded and unpacked the samples source bundle 
-or cloned the the samples repository you need to download
-these additional development software tools.
+Once you have downloaded or cloned the the samples repository
+from https://github.com/apache/incubator-edgent-samples
+you need to download these additional development software tools.
 
 * Java 8 - The development setup assumes Java 8
 
@@ -86,8 +86,8 @@ in a maven repository such as Maven Central.
 
 Alternatively, you can download the Edgent SDK sources and build them,
 populating your local maven repository.  The samples
-will then use those Edgent SDK jars.  Adjust the `edgent.version` 
-property in the top level samples `pom.xml` accordingly.
+will then use those Edgent SDK jars. See the note below about
+building against a different Edgent runtime version.
 See [downloads](https://edgent.apache.org/docs/downloads) 
 for downloading the Edgent SDK sources.
 
@@ -103,14 +103,27 @@ which is not supported on the Android platform.
 
 Build the samples
 ```sh
-./mvnw clean package  # -Pplatform-java7 and/or -Dedgent.runtime.version=<the-version> as needed
+./mvnw clean package  # -Pplatform-java7 as needed
 ```
 
 A standard jar and uber jar are created for each sample category
 in the sample category's target directory: `<category>/target`.
 
+## Building against a different Edgent runtime version
 
-## Running the samples
+To change the version of the Edgent runtime artifacts used,
+edit the `edgent.runtime.version` property in the top level
+`pom.xml`. e.g.,
+```xml
+    <edgent.runtime.version>1.3.0-SNAPSHOT</edgent.runtime.version>
+```
+
+Note: Do NOT override the value via
+`./mvnw ... -Dedgent.runtime.version=<the-version>`.
+The build will not behave as desired.
+
+
+# Running the samples
 
 See the `README.md` in each sample category directory for information
 on running the samples.

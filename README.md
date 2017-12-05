@@ -117,7 +117,7 @@ which is not supported on the Android platform.
 
 Build the samples
 ```sh
-./mvnw clean package  # -Pplatform-java7
+./mvnw clean package  # -Pplatform-java7 as needed
 ```
 
 A standard jar and uber jar are created for each sample category
@@ -138,7 +138,7 @@ Note: Do NOT override the value via
 The build will not behave as desired.
 
 A similar declaration is present in template/pom.xml.
-hen running get-edgent-jars.sh, specify `--version=<the-version>`.
+When running get-edgent-jars.sh, specify `--version=<the-version>`.
 
 
 # Running the samples

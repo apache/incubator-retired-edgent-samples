@@ -86,7 +86,7 @@ To clone the template project for your application project:
 Verify you can run the imported template app:
 
 1. From the Eclipse *Navigate* menu, select *Open Type*
-   + enter type type name `TemplateApp` and click *OK*
+   + enter type name `TemplateApp` and click *OK*
 2. right click on the `TemplateApp` class name and from the context menu
    + click on *Run As*, then *Java application*.  
   `TemplateApp` runs and prints to the Console view.

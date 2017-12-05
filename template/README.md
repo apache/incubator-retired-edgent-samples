@@ -1,17 +1,40 @@
-An Edgent Application template project.
-
-Clone this template project folder to create your Edgent application project.
+This is an Edgent Application template project.
 
 The project's pom supports
 
 - building for java8, java7 or android execution environments
 - building a standard jar and uber jar
 
+# Quickstart
+
+Clone this template project folder to start creating your
+Edgent application project.
+
+## Cloning the template
+
+In the unpacked samples folder
+
+```sh
+cp -R template ~/myApp
+```
+
+Verify the setup
+
+```sh
+cd ~/myApp
+./mvnw clean package
+./app-run.sh  # prints a hello message
+```
+
+## Customize
+
 Edit the pom for your application.  Adjust it for your application's maven coordinates.
 The pom has potential Edgent dependenacies present and commented out.
 Include the Edgent Providers, Analytics, Utils, and Connectors used by your application.
 
-Read `../README.md` for general information about Edgent Application development.
+See `../README.md` for general information about Edgent Application development.
+
+# Overview
 
 The template includes a maven wrapper script to eliminate the need to
 manually download and install maven.
@@ -20,6 +43,19 @@ manually download and install maven.
 ```sh
 ./mvnw clean package  # add -Pplatform-java7 or -Pplatform-android as needed
 ```
+
+## Building against a different Edgent runtime version
+
+To change the version of the Edgent runtime artifacts used,
+edit the `edgent.runtime.version` property in the template's
+`pom.xml`. e.g.,
+```xml
+    <edgent.runtime.version>1.3.0-SNAPSHOT</edgent.runtime.version>
+```
+
+Note: Do NOT override the value via
+`./mvnw ... -Dedgent.runtime.version=<the-version>`.
+The build will not behave as desired.
 
 # Running the application
 

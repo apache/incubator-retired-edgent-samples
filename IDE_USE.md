@@ -60,7 +60,7 @@ Once the samples projects have been imported you can run them from
 Eclipse in the usual manner. E.g.,
 
 1. From the Eclipse *Navigate* menu, select *Open Type*
-   + enter type type name `HelloEdgent` and click *OK*
+   + enter type name `HelloEdgent` and click *OK*
 2. right click on the `HelloEdgent` class name and from the context menu
    + click on *Run As*, then *Java application*.
    `HelloEdgent` runs and prints to the Console view.
@@ -75,13 +75,13 @@ To clone the template project for your application project:
    from the unpacked samples folder
    + cp -R template ~/myApp
 2. Import the new project into your Eclipse workspace
-  1. from the Eclipse *File* menu, select *Import...*
-  2. from the *Maven* folder, select *Existing Maven Projects* and click *Next*
-     + browse to the new folder and select it.  The project's pom.xml file will be
-       listed and selected. 
-     + click *Finish*.  Eclipse starts the import process and builds the workspace.
-       Note, the new imported project's name will be `my-app`.
-       This can be renamed later.
+   1. from the Eclipse *File* menu, select *Import...*
+   2. from the *Maven* folder, select *Existing Maven Projects* and click *Next*
+      + browse to the new folder and select it.  The project's pom.xml file will be
+        listed and selected. 
+      + click *Finish*.  Eclipse starts the import process and builds the workspace.
+        Note, the new imported project's name will be `my-app`.
+        This can be renamed later.
 
 Verify you can run the imported template app:
 

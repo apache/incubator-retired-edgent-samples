@@ -261,6 +261,11 @@
                    paho.mqtt.  Apparently watson-iot or paho.mqtt
                    has some behind the scenes depedency that's not
                    captured in the uber jar when minimize is true.
+                   
+                   Hmm... apparently there may be a way to address this sort
+                   of thing using shade plugin configuration filters.
+                   See
+                   https://stackoverflow.com/questions/8817257/minimize-an-uber-jar-correctly-using-shade-plugin
                  -->
                <!-- <minimizeJar>true</minimizeJar> -->
                <shadedArtifactAttached>true</shadedArtifactAttached>

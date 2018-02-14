@@ -19,9 +19,9 @@ under the License.
 
 package org.apache.edgent.samples.utils.sensor;
 
-import java.text.DecimalFormat;
 import java.util.Random;
 
+import org.apache.commons.math3.util.Precision;
 import org.apache.edgent.analytics.sensors.Range;
 import org.apache.edgent.function.Supplier;
 
@@ -52,7 +52,6 @@ import org.apache.edgent.function.Supplier;
 public class SimpleSimulatedSensor implements Supplier<Double> {
     private static final long serialVersionUID = 1L;
     private int numFracDigits;
-    private volatile DecimalFormat df;
     private Random r = new Random();
     private final Range<Double> range;
     private final double deltaFactor;
@@ -126,13 +125,7 @@ public class SimpleSimulatedSensor implements Supplier<Double> {
     public void setNumberFractionalDigits(int numFracDigits) {
         this.numFracDigits = numFracDigits;
         if (numFracDigits <= 0) {
-            df = null;
-        }
-        else {
-            String fracPattern = "";
-            for (int i = 0; i < numFracDigits; i++)
-                fracPattern += "#";
-            df = new DecimalFormat("#."+fracPattern);
+            this.numFracDigits = 0;
         }
     }
     
@@ -167,9 +160,7 @@ public class SimpleSimulatedSensor implements Supplier<Double> {
                         ? range.upperEndpoint()
                         : range.lowerEndpoint();
         }
-        if (df != null)
-            nextValue = Double.valueOf(df.format(nextValue));
-        currentValue = nextValue;
+        currentValue = Precision.round(nextValue, numFracDigits);
         return currentValue;
     }
 }

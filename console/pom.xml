@@ -37,12 +37,10 @@
     <dependency>
       <groupId>${edgent.runtime.groupId}</groupId>
       <artifactId>edgent-console-server</artifactId>
-      <version>${edgent.runtime.version}</version>
     </dependency>
     <dependency>
       <groupId>${edgent.runtime.groupId}</groupId>
       <artifactId>edgent-utils-metrics</artifactId>
-      <version>${edgent.runtime.version}</version>
     </dependency>
   </dependencies>
 

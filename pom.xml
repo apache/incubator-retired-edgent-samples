@@ -118,20 +118,92 @@
     <dependency>
       <groupId>${edgent.runtime.groupId}</groupId>
       <artifactId>edgent-providers-direct</artifactId>
-      <version>${edgent.runtime.version}</version>
     </dependency>
     <dependency>
       <groupId>${edgent.runtime.groupId}</groupId>
       <artifactId>edgent-providers-development</artifactId>
-      <version>${edgent.runtime.version}</version>
     </dependency>
     <dependency>
       <groupId>${edgent.runtime.groupId}</groupId>
       <artifactId>edgent-providers-iot</artifactId>
-      <version>${edgent.runtime.version}</version>
     </dependency>
 
   </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>${edgent.runtime.groupId}</groupId>
+        <artifactId>edgent-providers-direct</artifactId>
+        <version>${edgent.runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${edgent.runtime.groupId}</groupId>
+        <artifactId>edgent-providers-development</artifactId>
+        <version>${edgent.runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${edgent.runtime.groupId}</groupId>
+        <artifactId>edgent-providers-iot</artifactId>
+        <version>${edgent.runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${edgent.runtime.groupId}</groupId>
+        <artifactId>edgent-analytics-sensors</artifactId>
+        <version>${edgent.runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${edgent.runtime.groupId}</groupId>
+        <artifactId>edgent-connectors-file</artifactId>
+        <version>${edgent.runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${edgent.runtime.groupId}</groupId>
+        <artifactId>edgent-analytics-math3</artifactId>
+        <version>${edgent.runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${edgent.runtime.groupId}</groupId>
+        <artifactId>edgent-connectors-iot</artifactId>
+        <version>${edgent.runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${edgent.runtime.groupId}</groupId>
+        <artifactId>edgent-connectors-iotp</artifactId>
+        <version>${edgent.runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${edgent.runtime.groupId}</groupId>
+        <artifactId>edgent-connectors-mqtt</artifactId>
+        <version>${edgent.runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${edgent.runtime.groupId}</groupId>
+        <artifactId>edgent-connectors-kafka</artifactId>
+        <version>${edgent.runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${edgent.runtime.groupId}</groupId>
+        <artifactId>edgent-connectors-jdbc</artifactId>
+        <version>${edgent.runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${edgent.runtime.groupId}</groupId>
+        <artifactId>edgent-connectors-serial</artifactId>
+        <version>${edgent.runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${edgent.runtime.groupId}</groupId>
+        <artifactId>edgent-console-server</artifactId>
+        <version>${edgent.runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${edgent.runtime.groupId}</groupId>
+        <artifactId>edgent-utils-metrics</artifactId>
+        <version>${edgent.runtime.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <pluginManagement>
